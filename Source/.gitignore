@@ -1,0 +1,11 @@
+node_modules/
+out/
+release/
+test-results/
+playwright-report/
+.local/
+src/renderer/public/pdf-assets/
+*.sqlite*
+*.pdf
+*.log
+!tests/fixtures/*.pdf

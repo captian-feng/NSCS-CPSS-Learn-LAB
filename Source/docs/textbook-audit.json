@@ -1,0 +1,33 @@
+{
+  "pages": 1058,
+  "sourceHash": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d",
+  "parts": 7,
+  "chapters": 31,
+  "chapterStartFailures": [],
+  "tocNodes": 195,
+  "blocks": 8334,
+  "durationSeconds": 17.54,
+  "noTextPages": [
+    1,
+    142,
+    358,
+    571,
+    1058
+  ],
+  "textPagesBelow98Percent": [],
+  "htmlRegions": 302,
+  "nonFooterImageInstances": 247,
+  "uncoveredNonFooterImageInstances": [],
+  "blockKinds": {
+    "heading": 1241,
+    "paragraph": 4670,
+    "list": 2108,
+    "caption": 315
+  },
+  "decoderWarnings": 0,
+  "databaseBytes": 23941120,
+  "manuallyViewedPages": [
+    31,
+    53
+  ]
+}

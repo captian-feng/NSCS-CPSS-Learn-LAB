@@ -1,0 +1,76 @@
+{
+  "name": "cpss-lab",
+  "version": "0.3.0",
+  "description": "CPSS LAB — offline sport science reading and study platform",
+  "author": "CPSS LAB contributors",
+  "private": true,
+  "type": "module",
+  "main": "out/main/index.js",
+  "scripts": {
+    "predev": "node scripts/assets.mjs",
+    "prebuild": "node scripts/assets.mjs",
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:textbook": "playwright test --config playwright.textbook.config.ts",
+    "prepare:textbook": "npm run build && node out/main/prepareBook.js",
+    "dist:win:textbook": "npm run check && node scripts/prepare-cross-win.mjs && electron-builder --win zip --x64 --config electron-builder.textbook.cjs --config.directories.app=.local/windows-app",
+    "check": "npm run typecheck && npm test && npm run build",
+    "dist:win": "npm run check && electron-builder --win nsis zip --x64",
+    "dist:win:cross": "npm run check && node scripts/prepare-cross-win.mjs && electron-builder --win zip --x64 --config.directories.app=.local/windows-app --config.win.signAndEditExecutable=false --config.win.artifactName=CPSS-LAB-Windows-Portable.zip",
+    "dist:linux": "npm run build && electron-builder --linux dir --x64",
+    "package:source": "node scripts/source-archive.mjs"
+  },
+  "dependencies": {
+    "pdfjs-dist": "5.4.624",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.1",
+    "electron": "44.9.0",
+    "electron-builder": "26.15.3",
+    "electron-vite": "6.0.0",
+    "pdf-lib": "1.17.1",
+    "typescript": "5.9.3",
+    "vite": "8.3.4",
+    "vitest": "4.1.0"
+  },
+  "build": {
+    "appId": "org.cpsslab.desktop",
+    "productName": "CPSS LAB",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "npmRebuild": false,
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "artifactName": "CPSS-LAB-Windows-Portable.${ext}"
+    },
+    "nsis": {
+      "artifactName": "CPSS-LAB-Windows-Setup.${ext}",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "linux": {
+      "target": "dir",
+      "category": "Education"
+    }
+  }
+}
