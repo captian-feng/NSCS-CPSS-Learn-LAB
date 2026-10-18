@@ -1,0 +1,2052 @@
+{
+  "version": "2026-10-18.1",
+  "sourceHash": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d",
+  "questions": [
+    {
+      "id": "cpss-ch01-01",
+      "chapter": 1,
+      "chapterTitle": "Chapter 1. Performance Dimensions",
+      "priority": 1,
+      "topic": "运动科学决策",
+      "prompt": "教练想用监测系统改善表现，运动科学家首先应做什么？",
+      "options": [
+        {
+          "text": "用单一指标解释全部表现",
+          "explanation": "运动表现受多个相互作用的因素影响。"
+        },
+        {
+          "text": "明确表现问题与可执行的决策",
+          "explanation": "数据采集应服务具体决策与表现目标。"
+        },
+        {
+          "text": "先购买传感器再寻找用途",
+          "explanation": "工具应服从问题，采购不是决策目标。"
+        },
+        {
+          "text": "只报告所有原始数据",
+          "explanation": "原始数据还需要结合情境解释。"
+        }
+      ],
+      "correct": 1,
+      "source": {
+        "page": 53,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p53:b1",
+        "quote": "Thus, for something to be considered information, it must have the potential to shift thinking and decision making. While this sounds simple, accessing a continuous flow of high-quality information is not always easy."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch01-02",
+      "chapter": 1,
+      "chapterTitle": "Chapter 1. Performance Dimensions",
+      "priority": 2,
+      "topic": "高表现团队协作",
+      "prompt": "同一运动员的体能、技术与医疗建议冲突，较合理的做法是？",
+      "options": [
+        {
+          "text": "让设备供应商决定训练",
+          "explanation": "供应商不承担团队的完整表现决策。"
+        },
+        {
+          "text": "忽略教练的实践经验",
+          "explanation": "科学证据应与实践情境共同使用。"
+        },
+        {
+          "text": "围绕运动员目标整合团队信息",
+          "explanation": "共享目标和沟通使不同专业形成协调行动。"
+        },
+        {
+          "text": "各部门单独最大化自己的指标",
+          "explanation": "局部指标改善未必提高整体表现。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 54,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p54:b0",
+        "quote": "Recognizing this, sporting organizations have looked to their high- performance unit (HPU), sometimes referred to as the off-field team (e.g., strength and conditioning professionals, physical therapists, and nutritionists), to pick up the technological slack."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch02-01",
+      "chapter": 2,
+      "chapterTitle": "Chapter 2. Training Load Model",
+      "priority": 1,
+      "topic": "内部与外部负荷",
+      "prompt": "两名运动员完成相同跑量，却有不同心率与主观用力感，应如何理解？",
+      "options": [
+        {
+          "text": "心率属于外部负荷",
+          "explanation": "心率反映机体反应，属于内部指标。"
+        },
+        {
+          "text": "主观用力感与负荷无关",
+          "explanation": "主观量表可用于评估内部反应。"
+        },
+        {
+          "text": "相同外部任务可产生不同内部反应",
+          "explanation": "内部负荷描述个体对外部任务的生理和心理反应。"
+        },
+        {
+          "text": "跑量相同就表示内部负荷相同",
+          "explanation": "任务剂量不能保证个体反应一致。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 74,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p74:b2",
+        "quote": "A key component of managing the training process is an understanding of the response or internal load that will occur due to a given training stimulus (also referred to as a training impulse or external load)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch02-02",
+      "chapter": 2,
+      "chapterTitle": "Chapter 2. Training Load Model",
+      "priority": 2,
+      "topic": "训练监控整合",
+      "prompt": "负荷增加后表现暂时下降，最合理的监控策略是？",
+      "options": [
+        {
+          "text": "只看一次跳跃测试",
+          "explanation": "单次指标可能受测量误差与情境影响。"
+        },
+        {
+          "text": "对所有运动员使用同一调整幅度",
+          "explanation": "训练反应具有个体差异。"
+        },
+        {
+          "text": "结合负荷、疲劳、恢复与表现趋势解释",
+          "explanation": "训练同时产生适应和疲劳，需整合多源信息。"
+        },
+        {
+          "text": "立即认定训练没有适应效果",
+          "explanation": "短期疲劳可掩盖长期适应。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 72,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p72:b1",
+        "quote": "This disruption to homeostasis results in a transient performance reduction (i.e., fatigue) and is followed by a supercompensation effect whereby performance is enhanced (39) if the body is allowed to adapt."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch03-01",
+      "chapter": 3,
+      "chapterTitle": "Chapter 3. Periodization and Programming for Individual Sports",
+      "priority": 1,
+      "topic": "周期化与训练编排",
+      "prompt": "关于周期化与编排的关系，哪项更准确？",
+      "options": [
+        {
+          "text": "两者都仅指每次训练组数",
+          "explanation": "组数是编排细节，不能代表完整长期规划。"
+        },
+        {
+          "text": "周期化完全不需要监控反馈",
+          "explanation": "实际计划需要根据反应和赛程调整。"
+        },
+        {
+          "text": "所有项目必须用同一年度模板",
+          "explanation": "项目和个体目标会影响规划。"
+        },
+        {
+          "text": "周期化组织长期目标，编排安排具体训练内容",
+          "explanation": "两者相互关联，但规划层级和具体程度不同。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 102,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p102:b1",
+        "quote": "Thus, the essence of a periodized training plan is the ability to make sound programming decisions that leverage combinations of training methods and consider the athlete’s current performance profile in order to optimize the training process."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch03-02",
+      "chapter": 3,
+      "chapterTitle": "Chapter 3. Periodization and Programming for Individual Sports",
+      "priority": 2,
+      "topic": "训练减量",
+      "prompt": "重要比赛前安排减量，主要目的是什么？",
+      "options": [
+        {
+          "text": "保证所有体能指标停止变化",
+          "explanation": "减量不是冻结适应或保证结果。"
+        },
+        {
+          "text": "让所有运动员完全停止训练一个月",
+          "explanation": "减量不等于长时间完全停训。"
+        },
+        {
+          "text": "减少累积疲劳并尽量保留已有适应",
+          "explanation": "减量通过调整负荷使比赛时表现得以发挥。"
+        },
+        {
+          "text": "尽量在最后一天增加疲劳",
+          "explanation": "临赛累积疲劳通常妨碍表现。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 122,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p122:b1",
+        "quote": "This process is referred to as a taper, (30) which should be defined as “a progressive, non-linear reduction of the training load during a variable period of time, in an attempt to reduce the physiological and psychological stress of daily training and optimizing performance” (58)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch04-01",
+      "chapter": 4,
+      "chapterTitle": "Chapter 4. Periodization and Programming for Team Sports",
+      "priority": 1,
+      "topic": "团队项目微周期",
+      "prompt": "团队一周有多场比赛，安排训练首先要考虑什么？",
+      "options": [
+        {
+          "text": "每人每天完成完全相同负荷",
+          "explanation": "出场时间和个体需求并不相同。"
+        },
+        {
+          "text": "不论赛程都重复同一高强度课",
+          "explanation": "固定模板可能与比赛恢复冲突。"
+        },
+        {
+          "text": "只根据赛季总跑量安排当天训练",
+          "explanation": "总量不能替代短期负荷情境。"
+        },
+        {
+          "text": "结合比赛负荷、恢复时间和个体出场情况",
+          "explanation": "比赛密度与角色差异影响训练刺激和恢复需求。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 150,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p150:b5",
+        "quote": "This aspect, considering the training dynamics between consecutive matches during a season, requires a broader understanding of the entire program, and needs to take into consideration the previous match’s locomotor load."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch04-02",
+      "chapter": 4,
+      "chapterTitle": "Chapter 4. Periodization and Programming for Team Sports",
+      "priority": 2,
+      "topic": "HIIT 剂量控制",
+      "prompt": "设计高强度间歇训练时，哪种做法合理？",
+      "options": [
+        {
+          "text": "一起考虑工作时长、强度、恢复与目标反应",
+          "explanation": "多种参数共同决定间歇训练的刺激。"
+        },
+        {
+          "text": "只规定总时长而忽略强度",
+          "explanation": "同样时长可能产生不同训练刺激。"
+        },
+        {
+          "text": "认为所有小场比赛的刺激都相同",
+          "explanation": "人数、场地与规则会改变反应。"
+        },
+        {
+          "text": "恢复时间不影响训练效果",
+          "explanation": "恢复会改变后续强度与生理反应。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 130,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p130:b3",
+        "quote": "Traditionally, many coaches and practitioners have fallen into the trap of assuming that a particular training format (e.g., short interval, long interval) will necessarily elicit a physiological response."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch05-01",
+      "chapter": 5,
+      "chapterTitle": "Chapter 5. Key Performance Indicators",
+      "priority": 1,
+      "topic": "关键表现指标筛选",
+      "prompt": "球队监测指标太多，应优先保留哪类 KPI？",
+      "options": [
+        {
+          "text": "设备能输出的所有数字",
+          "explanation": "可测量不等于与表现有关键关系。"
+        },
+        {
+          "text": "波动最大的指标",
+          "explanation": "波动可能源于噪声而非表现价值。"
+        },
+        {
+          "text": "最容易在社交媒体展示的指标",
+          "explanation": "展示便利不是筛选科学依据。"
+        },
+        {
+          "text": "与项目成功因素和可执行决策相关的指标",
+          "explanation": "关键指标的价值在于与表现目标相关且能够行动。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 169,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p169:b1",
+        "quote": "Key performance indicators should always be measurable, objective, and actionable. They should be useful for influencing performance planning relating to sport performance. In summary, a suitable KPI should"
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch05-02",
+      "chapter": 5,
+      "chapterTitle": "Chapter 5. Key Performance Indicators",
+      "priority": 2,
+      "topic": "项目需求分析",
+      "prompt": "将耐力项目的 KPI 直接用于技巧评分项目，主要风险是什么？",
+      "options": [
+        {
+          "text": "成绩指标永远不需要解释",
+          "explanation": "指标仍需结合项目和个体情境。"
+        },
+        {
+          "text": "只要单位相同就必然可比",
+          "explanation": "相同单位不保证构念和测量情境一致。"
+        },
+        {
+          "text": "忽视不同项目的表现决定因素",
+          "explanation": "指标需建立在项目需求与成功因素分析之上。"
+        },
+        {
+          "text": "所有运动共享相同技术评分",
+          "explanation": "不同项目具有不同任务约束。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 156,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p156:b3",
+        "quote": "For these reasons, sport scientists should have a deep knowledge and understanding of the demands of the sport, the intricacies of rules and regulations, the specifics of the equipment, and the details of competition schedules in order to develop the best possible program."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch06-01",
+      "chapter": 6,
+      "chapterTitle": "Chapter 6. Profiling and Benchmarking",
+      "priority": 1,
+      "topic": "效度与信度",
+      "prompt": "测试每次结果很接近，是否证明它测到了目标能力？",
+      "options": [
+        {
+          "text": "能，信度和效度完全相同",
+          "explanation": "两者是不同的测试质量属性。"
+        },
+        {
+          "text": "能，只要设备价格高",
+          "explanation": "价格不能证明构念效度。"
+        },
+        {
+          "text": "不能，因为重复测试没有意义",
+          "explanation": "重复测试有助于评估误差与稳定性。"
+        },
+        {
+          "text": "不能，重复性好不等于效度足够",
+          "explanation": "信度关乎一致性，效度关乎测量与目标构念的关系。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 193,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p193:b0",
+        "quote": "Validity is a critical factor for test quality. This refers to whether the test measures what it is designed to measure. Several different types of validity are of concern to the sport scientist. Face validity is the degree to which the test measures the variable it is intended to measure."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch06-02",
+      "chapter": 6,
+      "chapterTitle": "Chapter 6. Profiling and Benchmarking",
+      "priority": 2,
+      "topic": "基准比较与标准分",
+      "prompt": "解释运动员的 z 分数时，最应同时检查什么？",
+      "options": [
+        {
+          "text": "参照人群、指标方向及测量情境",
+          "explanation": "标准分依赖参照分布，正负意义也随指标方向改变。"
+        },
+        {
+          "text": "正值必然代表运动表现更好",
+          "explanation": "耗时等指标越低可能越好。"
+        },
+        {
+          "text": "不同年龄人群的标准分可无条件互换",
+          "explanation": "参照人群改变会影响解释。"
+        },
+        {
+          "text": "z 分数自动消除设备误差",
+          "explanation": "标准化不能消除原始测量误差。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 199,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p199:b1",
+        "quote": "As mentioned previously, the z-score represents how many standard deviations and the direction of the score from the mean. The athlete’s score can also be compared to the person’s baseline, which is a common approach used in athlete monitoring (47):"
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch07-01",
+      "chapter": 7,
+      "chapterTitle": "Chapter 7. Technological Implementation",
+      "priority": 1,
+      "topic": "技术实施顺序",
+      "prompt": "团队引入新监测技术，较合理的第一步是？",
+      "options": [
+        {
+          "text": "先默认新设备一定优于旧方法",
+          "explanation": "新颖性不等同于适用性。"
+        },
+        {
+          "text": "省略人员培训以节约时间",
+          "explanation": "采集执行会影响数据质量和落实。"
+        },
+        {
+          "text": "只用销售演示作为效度证据",
+          "explanation": "销售展示不能代替质量评估。"
+        },
+        {
+          "text": "明确使用场景、实际问题和团队需求",
+          "explanation": "技术实施应从情境和需要出发。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 218,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p218:b0",
+        "quote": "Profiling or benchmarking (determining characteristics of elite performers) (see chapter 6) Identifying talent Monitoring training and competition performance outcomes (readiness and risk management; individual and team performance) (see chapters 9 and 19) Being aware of the context and the goals one wants to achieve with use of the technology (this is paramount)"
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch07-02",
+      "chapter": 7,
+      "chapterTitle": "Chapter 7. Technological Implementation",
+      "priority": 2,
+      "topic": "数据安全",
+      "prompt": "监测平台包含运动员健康信息，应如何管理？",
+      "options": [
+        {
+          "text": "删除文件名即可确保匿名",
+          "explanation": "内容和关联字段仍可能识别个体。"
+        },
+        {
+          "text": "设置授权、访问范围和安全存储流程",
+          "explanation": "数据治理需保护敏感信息并明确使用权限。"
+        },
+        {
+          "text": "所有员工永久共享同一密码",
+          "explanation": "共享账户难以控制权限和追溯访问。"
+        },
+        {
+          "text": "把健康数据公开方便团队沟通",
+          "explanation": "公开敏感信息不属于合理共享。"
+        }
+      ],
+      "correct": 1,
+      "source": {
+        "page": 224,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p224:b1",
+        "quote": "With the possibility of collecting all types of information, including biometric and medical data, government institutions should seek to enforce strict information security policies and regulations aimed at protecting the confidentiality and integrity of athlete data gathered from wearables."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch08-01",
+      "chapter": 8,
+      "chapterTitle": "Chapter 8. Data Hygiene",
+      "priority": 1,
+      "topic": "缺失值与数据完整性",
+      "prompt": "冲刺成绩缺失，应直接填成 0 吗？",
+      "options": [
+        {
+          "text": "先区分缺失原因并记录处理规则",
+          "explanation": "零值可能是合法测量或错误替代，缺失应有一致标识。"
+        },
+        {
+          "text": "应当，缺失和零没有区别",
+          "explanation": "零会改变分布、均值与后续判断。"
+        },
+        {
+          "text": "应当，这会自动提高信度",
+          "explanation": "替代值不会改善原始测量质量。"
+        },
+        {
+          "text": "应删除所有包含缺失值的运动员",
+          "explanation": "一律删除可能损失信息并引入偏差。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 242,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p242:b1",
+        "quote": "Missing values should be identified by a consistent convention such as N/A or NULL. Do not apply calculations, cell merging, or syntax highlighting to raw data files. This will prevent potentially overwriting the raw data and breaking the reproducible workflow."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch08-02",
+      "chapter": 8,
+      "chapterTitle": "Chapter 8. Data Hygiene",
+      "priority": 2,
+      "topic": "异常值清理",
+      "prompt": "某次数据异常偏高，正确的处理顺序是？",
+      "options": [
+        {
+          "text": "删除所有影响结论的数据",
+          "explanation": "按结论删数据会引入偏差。"
+        },
+        {
+          "text": "直接改成团队平均值且不记录",
+          "explanation": "无记录替换会破坏可追溯性。"
+        },
+        {
+          "text": "认为异常必然代表运动员不配合",
+          "explanation": "异常也可能来自设备、操作或真实变化。"
+        },
+        {
+          "text": "核对采集、单位和情境后按规则处理",
+          "explanation": "异常可能是真实事件或录入错误，需留下可追溯流程。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 244,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p244:b2",
+        "quote": "Data cleaning is a necessary and important step before one analyzes or draws conclusions based on experimental data. Despite implementation of safeguards such as data dictionaries and consistent test procedures, it is still likely that any data collected will have some errors that need to be cleaned."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch09-01",
+      "chapter": 9,
+      "chapterTitle": "Chapter 9. Characteristics of Tracking Systems and Load Monitoring",
+      "priority": 1,
+      "topic": "追踪技术适用性",
+      "prompt": "为室内场馆选择追踪系统，应重点考虑什么？",
+      "options": [
+        {
+          "text": "所有追踪系统输出完全可互换",
+          "explanation": "不同系统的测量与计算可能不同。"
+        },
+        {
+          "text": "系统原理、场地覆盖和目标动作的测量质量",
+          "explanation": "定位系统的适用性受到环境与技术条件影响。"
+        },
+        {
+          "text": "室外 GPS 表现好就保证室内同样好",
+          "explanation": "卫星信号条件在室内可能受限。"
+        },
+        {
+          "text": "只比较设备重量",
+          "explanation": "重量不能概括定位精度和覆盖条件。"
+        }
+      ],
+      "correct": 1,
+      "source": {
+        "page": 252,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p252:b1",
+        "quote": "Likewise, this technology may provide solutions for outdoor sports by overcoming issues such as changes in illumination quality with OT (13) and satellite signal connection in built-up stadiums with the Global Positioning System (36)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch09-02",
+      "chapter": 9,
+      "chapterTitle": "Chapter 9. Characteristics of Tracking Systems and Load Monitoring",
+      "priority": 2,
+      "topic": "惯性传感器",
+      "prompt": "加速度计最直接测量的是哪类信号？",
+      "options": [
+        {
+          "text": "血液乳酸浓度",
+          "explanation": "乳酸需要不同的检测手段。"
+        },
+        {
+          "text": "教练战术意图",
+          "explanation": "战术意图需结合观察和情境解释。"
+        },
+        {
+          "text": "线性加速度相关信号",
+          "explanation": "加速度计属于惯性测量工具，不直接给出全部比赛情境。"
+        },
+        {
+          "text": "运动员的训练动机",
+          "explanation": "动机不是加速度计直接测量的物理量。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 254,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p254:b0",
+        "quote": "A power-saving reduction in sample rate would lead to an associated reduction in accuracy; a solution to this problem is the application of accelerometers (41). Multiple transducer inertial measurement units (IMU) are housed within microelectromechanical systems (MEMS)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch10-01",
+      "chapter": 10,
+      "chapterTitle": "Chapter 10. Analysis of Tracking Systems and Load Monitoring",
+      "priority": 1,
+      "topic": "系统间一致性",
+      "prompt": "赛季中更换追踪系统，能否直接拼接旧、新数据？",
+      "options": [
+        {
+          "text": "能，只要都输出米",
+          "explanation": "单位一致不保证测量一致。"
+        },
+        {
+          "text": "能，相关系数高就说明数值相等",
+          "explanation": "相关描述共同变化，不等于一致性。"
+        },
+        {
+          "text": "能，品牌越新数据就越准确",
+          "explanation": "技术更新不自动证明有效可比。"
+        },
+        {
+          "text": "先评估系统间一致性和处理差异",
+          "explanation": "系统算法、误差与定义不同可能造成不可比。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 267,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p267:b0",
+        "quote": "Understanding the existing validity and reliability research, including the potential between-systems agreement (or disagreement), along with how to implement such analysis in-house, is necessary."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch10-02",
+      "chapter": 10,
+      "chapterTitle": "Chapter 10. Analysis of Tracking Systems and Load Monitoring",
+      "priority": 2,
+      "topic": "速度阈值解释",
+      "prompt": "解释高速跑距离时，为什么要记录速度阈值？",
+      "options": [
+        {
+          "text": "阈值不会改变统计结果",
+          "explanation": "分类边界直接影响计数。"
+        },
+        {
+          "text": "只需报告总距离而不说明定义",
+          "explanation": "缺少定义限制结果比较。"
+        },
+        {
+          "text": "一个阈值能对所有群体完全等效",
+          "explanation": "个体能力和群体特征会影响解释。"
+        },
+        {
+          "text": "阈值定义会影响哪些距离被计入高速跑",
+          "explanation": "不同绝对或个体化阈值可能得出不同负荷结果。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 269,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p269:b4",
+        "quote": "Therefore, sport scientists can have relative confidence in associated metrics (i.e., total distance covered and the breakdown of the distance within various speed thresholds). However, a familiar pattern in GPS validation research, as with positional systems, suggests that the precision of GPS to measure speed and distance decreases with an increased change in the rate of velocity, regardless of the sampling rate (1, 74)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch11-01",
+      "chapter": 11,
+      "chapterTitle": "Chapter 11. Kinematics and Gait Analysis",
+      "priority": 1,
+      "topic": "运动学与动力学",
+      "prompt": "运动学分析直接描述的主要是什么？",
+      "options": [
+        {
+          "text": "营养摄入的精确比例",
+          "explanation": "这不是运动学变量。"
+        },
+        {
+          "text": "运动员的主观疲劳评分",
+          "explanation": "主观疲劳是另一类监控信息。"
+        },
+        {
+          "text": "位移、速度和加速度等运动特征",
+          "explanation": "运动学描述运动本身；解释产生运动的力属于动力学。"
+        },
+        {
+          "text": "肌肉产生的全部内力",
+          "explanation": "仅由运动学数据不能直接得到全部肌肉内力。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 292,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p292:b1",
+        "quote": "The most commonly reported kinematic variables relate to the center of mass (CoM) (of an individual segment or the whole body), as well as linear and angular displacement, velocity, and acceleration."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch11-02",
+      "chapter": 11,
+      "chapterTitle": "Chapter 11. Kinematics and Gait Analysis",
+      "priority": 2,
+      "topic": "完整波形分析",
+      "prompt": "只比较落地时的一个峰值，主要会遗漏什么？",
+      "options": [
+        {
+          "text": "运动学波形可单独证明受伤因果关系",
+          "explanation": "观察性动作差异不等于因果证据。"
+        },
+        {
+          "text": "动作随时间变化的时序与协调信息",
+          "explanation": "波形分析可补充离散指标未呈现的动态特征。"
+        },
+        {
+          "text": "任何峰值都没有使用价值",
+          "explanation": "峰值可以有价值，但信息不完整。"
+        },
+        {
+          "text": "时间归一化会自动消除所有误差",
+          "explanation": "处理方法仍存在假设与误差来源。"
+        }
+      ],
+      "correct": 1,
+      "source": {
+        "page": 301,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p301:b0",
+        "quote": "Due to potential information loss during discrete point analysis, other analysis methods that use all data within a movement cycle (waveform analysis) have been introduced."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch12-01",
+      "chapter": 12,
+      "chapterTitle": "Chapter 12. Kinetics and Force Platforms",
+      "priority": 1,
+      "topic": "测力台测量",
+      "prompt": "测力台直接提供的核心信息是什么？",
+      "options": [
+        {
+          "text": "运动员的睡眠分期",
+          "explanation": "睡眠分期不属于测力台直接输出。"
+        },
+        {
+          "text": "所有技术动作的伤病诊断",
+          "explanation": "外力数据不能单独构成临床诊断。"
+        },
+        {
+          "text": "接触过程中地面反作用力及其时间特征",
+          "explanation": "测力台测量外部作用力，用于进一步计算和解释。"
+        },
+        {
+          "text": "每块肌肉独立产生的力",
+          "explanation": "肌肉内力不能由平台直接逐一测出。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 317,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p317:b4",
+        "quote": "Force platforms provide information on kinetics, a term that refers to the forces applied to and by objects. These forces are measured using embedded load cells that include strain gauges, piezoelectric cells, or beam load cells."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch12-02",
+      "chapter": 12,
+      "chapterTitle": "Chapter 12. Kinetics and Force Platforms",
+      "priority": 2,
+      "topic": "力时曲线与冲量",
+      "prompt": "两次跳跃峰值力相似，为什么起跳速度仍可能不同？",
+      "options": [
+        {
+          "text": "峰值相同就必然有相同冲量",
+          "explanation": "作用时间和曲线形状仍会改变积分。"
+        },
+        {
+          "text": "体重对净力计算没有影响",
+          "explanation": "净力需要考虑重力等条件。"
+        },
+        {
+          "text": "测力台无法记录时间",
+          "explanation": "力时数据正是平台分析的基础。"
+        },
+        {
+          "text": "施力持续时间和净冲量可能不同",
+          "explanation": "冲量涉及力随时间的积分，峰值不能代替整条曲线。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 318,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p318:b0",
+        "quote": "In comparison, force platforms use the more accurate impulse– momentum relationship (45), which, unlike the flight-time method, is not affected by variations in methodological factors such as takeoff and landing position (45, 51)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch13-01",
+      "chapter": 13,
+      "chapterTitle": "Chapter 13. Strength Tracking and Analysis",
+      "priority": 1,
+      "topic": "力—速度—功率剖面",
+      "prompt": "建立运动员力—速度—功率剖面的主要价值是什么？",
+      "options": [
+        {
+          "text": "描述力量表现特征并辅助制定个体训练目标",
+          "explanation": "剖面有助于识别个体特征，但仍需结合任务与测量条件。"
+        },
+        {
+          "text": "无需校准就能取代所有力量评估",
+          "explanation": "测量效度与校准仍有必要。"
+        },
+        {
+          "text": "所有人同一速度必然对应同一百分比 1RM",
+          "explanation": "个体和动作会影响负荷速度关系。"
+        },
+        {
+          "text": "速度下降必然意味着受伤",
+          "explanation": "下降也可能来自疲劳、执行或测量误差。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 349,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p349:b0",
+        "quote": "This is the athlete’s force–velocity–power (F-V-P) profile (see figure 13.2). It represents a more complete view or spectrum than one, two, or three tests in specific conditions (for instance, 1RM squat, vertical or horizontal jump, 20-m sprints)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch13-02",
+      "chapter": 13,
+      "chapterTitle": "Chapter 13. Strength Tracking and Analysis",
+      "priority": 2,
+      "topic": "标准化力量测试",
+      "prompt": "比较两次力量测试，哪种安排更能提高可解释性？",
+      "options": [
+        {
+          "text": "只保留最好的一次结果而不说明规则",
+          "explanation": "选择规则不透明会影响解释。"
+        },
+        {
+          "text": "忽略学习效应与疲劳",
+          "explanation": "这些因素可能改变测试表现。"
+        },
+        {
+          "text": "保持动作、器材、热身与执行标准一致",
+          "explanation": "标准化有助于区分真实变化与测试程序差异。"
+        },
+        {
+          "text": "每次使用不同动作和器材",
+          "explanation": "方法变化会混入额外差异。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 343,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p343:b1",
+        "quote": "This goes from the strength of a specific muscle group (e.g., knee extensors) in very standardized conditions (e.g., using a leg extension machine to isolate the movement to a single joint), to the assessment of lower-body extensor strength during cycling (implying multiple joints) or the assessment of strength during rowing, which involves the whole body."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch14-01",
+      "chapter": 14,
+      "chapterTitle": "Chapter 14. Heart Rate and Heart Rate Variability",
+      "priority": 1,
+      "topic": "HRV 的含义",
+      "prompt": "心率变异性 HRV 主要反映什么？",
+      "options": [
+        {
+          "text": "相邻心搏间期变化及相关自主神经调节信息",
+          "explanation": "HRV 关注间期变化，不能等同于单一平均心率。"
+        },
+        {
+          "text": "一分钟内平均心率的另一种单位",
+          "explanation": "平均心率与间期变异性不是同一指标。"
+        },
+        {
+          "text": "直接测量全部肌肉损伤",
+          "explanation": "HRV 不是肌肉损伤的直接检测。"
+        },
+        {
+          "text": "越高就保证所有人当天表现越好",
+          "explanation": "解释依赖个体基线、趋势与情境。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 369,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p369:b4",
+        "quote": "In the subsequent decades, the analysis of heart rate and related metrics such as heart rate variability (HRV), a measure of the variation of beat-to-beat intervals over a specific time, has become increasingly commonplace throughout the field of human performance (6, 13)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch14-02",
+      "chapter": 14,
+      "chapterTitle": "Chapter 14. Heart Rate and Heart Rate Variability",
+      "priority": 2,
+      "topic": "HRV 测量标准化",
+      "prompt": "比较每日静息 HRV 时，哪种做法更合理？",
+      "options": [
+        {
+          "text": "每天任意时间和姿势测一次",
+          "explanation": "条件变化可能造成非训练因素波动。"
+        },
+        {
+          "text": "用单日异常值直接决定整月计划",
+          "explanation": "应结合趋势、误差和其他信息。"
+        },
+        {
+          "text": "只与陌生人的最高值比较",
+          "explanation": "人际差异不适合作为唯一决策依据。"
+        },
+        {
+          "text": "固定姿势、时间和测量流程并结合个体趋势",
+          "explanation": "条件标准化减少不必要的混杂。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 376,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p376:b4",
+        "quote": "Since the sympathetic system is highly sensitive to a variety of stressors, resting measurements have been shown to be the most accurate when the conditions are standardized in terms of time of day, body position, nutritional intake, and environment (4)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch15-01",
+      "chapter": 15,
+      "chapterTitle": "Chapter 15. Electroencephalography and Electroneuromyography",
+      "priority": 1,
+      "topic": "脑电与肌电信号",
+      "prompt": "EEG 与表面 EMG 的区别是什么？",
+      "options": [
+        {
+          "text": "分别关注脑部电活动和肌肉相关电活动",
+          "explanation": "两者的信号来源、布置和解释不同。"
+        },
+        {
+          "text": "两者都直接测量最大肌肉力量",
+          "explanation": "电活动并不等同于机械力。"
+        },
+        {
+          "text": "EEG 直接显示运动员真实想法",
+          "explanation": "脑电信号不能直接读取具体思想。"
+        },
+        {
+          "text": "EMG 只测量关节角度",
+          "explanation": "关节运动学与肌电不是同一测量。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 396,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p396:b0",
+        "quote": "The two most important methods that sport scientists can use to monitor and evaluate neuromuscular changes in response to training loads are electroencephalography (EEG) and electroneuromyography (ENMG)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch15-02",
+      "chapter": 15,
+      "chapterTitle": "Chapter 15. Electroencephalography and Electroneuromyography",
+      "priority": 2,
+      "topic": "电生理测量误差",
+      "prompt": "运动中的电生理信号异常，首先要考虑什么？",
+      "options": [
+        {
+          "text": "电极位置、接触质量和运动伪迹",
+          "explanation": "信号处理前应检查采集条件和可能的污染来源。"
+        },
+        {
+          "text": "所有波动都是神经适应",
+          "explanation": "伪迹可能制造非生理变化。"
+        },
+        {
+          "text": "振幅大就必然代表力量更大",
+          "explanation": "振幅受多个采集和生理因素影响。"
+        },
+        {
+          "text": "不同电极布置可无条件直接比较",
+          "explanation": "电极位置与归一化会影响可比性。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 402,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p402:b4",
+        "quote": "After amplification, raw EEG data will still contain artifact—signals recorded in EEG data that were not produced by the brain (see figure 15.5; 21a). Artifacts must be removed before any meaningful analysis can be conducted."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch16-01",
+      "chapter": 16,
+      "chapterTitle": "Chapter 16. Biomarkers for Health and Performance",
+      "priority": 1,
+      "topic": "生物标志物解释",
+      "prompt": "某生物标志物偏离基线，最合理的解释方式是？",
+      "options": [
+        {
+          "text": "结合采样时机、个体趋势及训练和健康情境",
+          "explanation": "单项浓度变化不能脱离测量条件和个体差异解释。"
+        },
+        {
+          "text": "单次超出平均值就确诊疾病",
+          "explanation": "诊断需要适当临床评估而非单一孤立结果。"
+        },
+        {
+          "text": "浓度越高表现必然越好",
+          "explanation": "不同标志物方向和含义不同。"
+        },
+        {
+          "text": "直接用团队均值替代个体基线",
+          "explanation": "个体差异可能被均值掩盖。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 432,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p432:b6",
+        "quote": "This chapter reviews the primary considerations and principles of biomarker monitoring in sport and focuses on its application for the assessment of athlete health and performance."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch16-02",
+      "chapter": 16,
+      "chapterTitle": "Chapter 16. Biomarkers for Health and Performance",
+      "priority": 2,
+      "topic": "生物样本采集",
+      "prompt": "为了比较两个时间点的标志物，哪项最重要？",
+      "options": [
+        {
+          "text": "标准化采样、处理和分析条件",
+          "explanation": "前分析和分析环节都可引入变异。"
+        },
+        {
+          "text": "只要使用同一报告模板即可",
+          "explanation": "格式一致不能保证采样与检测一致。"
+        },
+        {
+          "text": "完全忽略进食和运动时间",
+          "explanation": "这些因素可能影响测量结果。"
+        },
+        {
+          "text": "越频繁采样越能消除所有噪声",
+          "explanation": "重复采样不能自动消除系统性误差。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 436,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p436:b3",
+        "quote": "The three areas are interrelated, but the biomarker selection, the sampling protocol (frequency and timing), and the interpretation might be different based on the area, the temporal factor of the internal response, and the influence of each modulator."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch17-01",
+      "chapter": 17,
+      "chapterTitle": "Chapter 17. Perception of Effort and Subjective Monitoring",
+      "priority": 1,
+      "topic": "主观用力感",
+      "prompt": "使用 RPE 监控时，哪种认识正确？",
+      "options": [
+        {
+          "text": "每个人相同评分一定代表相同外部功率",
+          "explanation": "个体反应与量表使用可能不同。"
+        },
+        {
+          "text": "主观量表能提供运动员对用力的感知信息",
+          "explanation": "主观信息可以补充外部负荷和其他反应指标。"
+        },
+        {
+          "text": "主观评价因此完全没有价值",
+          "explanation": "量表可在规范执行下提供有用信息。"
+        },
+        {
+          "text": "RPE 直接等于器械负重",
+          "explanation": "外部任务与内部感知不同。"
+        }
+      ],
+      "correct": 1,
+      "source": {
+        "page": 469,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p469:b2",
+        "quote": "Perception of effort (also called sense of effort or perceived exertion) has been associated with several definitions, yet the authors of this chapter feel the most appropriate is the “conscious sensation of how hard and strenuous a physical task is” (101)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch17-02",
+      "chapter": 17,
+      "chapterTitle": "Chapter 17. Perception of Effort and Subjective Monitoring",
+      "priority": 2,
+      "topic": "主观问卷执行",
+      "prompt": "如何提高主观监控记录的质量？",
+      "options": [
+        {
+          "text": "让教练替运动员填写感受",
+          "explanation": "代填改变了测量对象。"
+        },
+        {
+          "text": "公开比较并惩罚高疲劳评分",
+          "explanation": "惩罚可能导致瞒报和偏差。"
+        },
+        {
+          "text": "随时改变评分锚点但不说明",
+          "explanation": "量表定义变化会影响纵向比较。"
+        },
+        {
+          "text": "统一量表说明与采集时机，鼓励独立诚实回答",
+          "explanation": "标准化说明和环境有助于提高可比性与有效性。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 471,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p471:b2",
+        "quote": "This process is best achieved by using standardized verbal expressions on a scale. The construction and use of rating scales represents a major development in the measurement of perceived exertion, and the application of these scales to quantify sRPE in athlete monitoring is almost universal."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch18-01",
+      "chapter": 18,
+      "chapterTitle": "Chapter 18. Statistical Modeling",
+      "priority": 1,
+      "topic": "相关与因果",
+      "prompt": "两项指标相关很高，可以直接认定一个导致另一个吗？",
+      "options": [
+        {
+          "text": "不能，还需考虑设计、混杂及因果证据",
+          "explanation": "相关关系本身不能区分因果方向或共同原因。"
+        },
+        {
+          "text": "可以，只要相关为正",
+          "explanation": "相关正负都不能单独证明因果。"
+        },
+        {
+          "text": "可以，只要样本来自优秀运动员",
+          "explanation": "样本水平不自动解决混杂。"
+        },
+        {
+          "text": "不能，因此相关分析没有用途",
+          "explanation": "相关可用于描述关联和提出研究问题。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 529,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p529:b3",
+        "quote": "It is important to keep in mind that the effect size estimators are used only descriptively, without any causal connotation. In order to make causal claims, further criteria need to be taken into account (see the “Causal Inference” section)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch18-02",
+      "chapter": 18,
+      "chapterTitle": "Chapter 18. Statistical Modeling",
+      "priority": 2,
+      "topic": "不确定性与估计",
+      "prompt": "报告训练效果时，为什么要呈现置信区间等不确定性信息？",
+      "options": [
+        {
+          "text": "帮助判断估计精度与可能效应范围",
+          "explanation": "点估计需要与不确定性、实际意义共同解释。"
+        },
+        {
+          "text": "区间能保证个体必然得到同样收益",
+          "explanation": "群体估计不能保证每个人反应一致。"
+        },
+        {
+          "text": "只要显著就一定有实际重要性",
+          "explanation": "统计显著和实际重要性是不同问题。"
+        },
+        {
+          "text": "不显著就证明效果严格等于零",
+          "explanation": "证据不足不等于证明零效应。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 541,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p541:b4",
+        "quote": "The uncertainty of an estimated parameter can be represented with confidence intervals (CI). This implies that when sampling is repeated an infinite number of"
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch19-01",
+      "chapter": 19,
+      "chapterTitle": "Chapter 19. Injury Risk Model",
+      "priority": 1,
+      "topic": "损伤风险多因素模型",
+      "prompt": "预测损伤风险时，哪项认识更合理？",
+      "options": [
+        {
+          "text": "只看训练负荷即可忽略既往损伤",
+          "explanation": "既往情况及其他因素可能具有重要作用。"
+        },
+        {
+          "text": "风险由多因素与情境相互作用形成",
+          "explanation": "损伤机制复杂，单一阈值不能保证预测个体事件。"
+        },
+        {
+          "text": "一个指标能确定谁一定受伤",
+          "explanation": "风险估计不是确定性诊断。"
+        },
+        {
+          "text": "风险分数低就不需要任何监控",
+          "explanation": "低风险也不是零风险。"
+        }
+      ],
+      "correct": 1,
+      "source": {
+        "page": 564,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p564:b2",
+        "quote": "The reasons for this breakdown are multifactorial, workload-dependent, tissue-specific, and complex. Working to better understand each of these principles will underpin the sport scientist’s measurement and analytical choices."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch19-02",
+      "chapter": 19,
+      "chapterTitle": "Chapter 19. Injury Risk Model",
+      "priority": 2,
+      "topic": "风险筛查与预测",
+      "prompt": "筛查工具在一组运动员中区分能力较好，下一步应注意什么？",
+      "options": [
+        {
+          "text": "无需验证就推广到所有项目",
+          "explanation": "人群与情境变化可能使模型失效。"
+        },
+        {
+          "text": "把相关变量直接视为致伤原因",
+          "explanation": "预测关联不等于因果机制。"
+        },
+        {
+          "text": "只汇报最好的一个统计数值",
+          "explanation": "单指标不能概括模型局限和错误代价。"
+        },
+        {
+          "text": "验证新样本表现并考虑实际干预价值",
+          "explanation": "模型的外部适用性与决策后果都需要评估。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 578,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p578:b1",
+        "quote": "Sport scientists should be careful not to confuse association with prediction (3, 52, 73, 80). Just the fact that a risk factor may increase a group’s injury risk (e.g., low eccentric hamstring muscle strength) (67) does not mean all athletes who have low eccentric hamstring muscle strength will experience a hamstring strain."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch20-01",
+      "chapter": 20,
+      "chapterTitle": "Chapter 20. Data Mining and Nonlinear Data Analysis",
+      "priority": 1,
+      "topic": "过拟合与泛化",
+      "prompt": "模型在训练数据上表现完美，但新数据表现很差，最可能是什么？",
+      "options": [
+        {
+          "text": "数据越少模型必然越可靠",
+          "explanation": "小样本也可能增加不稳定性。"
+        },
+        {
+          "text": "只需再次报告训练准确率",
+          "explanation": "重复训练结果不能检验泛化。"
+        },
+        {
+          "text": "过拟合，模型学到了样本特有的噪声",
+          "explanation": "泛化性能需通过未参与拟合的数据评估。"
+        },
+        {
+          "text": "模型已证明普遍有效",
+          "explanation": "训练拟合好不代表新样本表现好。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 595,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p595:b1",
+        "quote": "Overfitting is one of the major issues experienced by machine learning, particularly when the sample size is small. Overfitting refers to a model that maps its training data so well that the model performs comparatively much more poorly when run on new data (20) (see figure 20.2)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch20-02",
+      "chapter": 20,
+      "chapterTitle": "Chapter 20. Data Mining and Nonlinear Data Analysis",
+      "priority": 2,
+      "topic": "数据挖掘验证",
+      "prompt": "构建预测模型时，哪种验证做法更合理？",
+      "options": [
+        {
+          "text": "让同一条记录同时出现在训练与测试集",
+          "explanation": "重叠会使评估过于乐观。"
+        },
+        {
+          "text": "只保留符合预期的测试结果",
+          "explanation": "选择性报告会夸大性能。"
+        },
+        {
+          "text": "将测试数据与拟合和调参过程隔离",
+          "explanation": "避免信息泄漏才能更可信地评估新数据表现。"
+        },
+        {
+          "text": "先用全部数据选择变量，再声称测试集独立",
+          "explanation": "测试集信息参与选择会导致泄漏。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 594,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p594:b0",
+        "quote": "One of the most common ways in which these models are evaluated is through validation. A variety of different validation approaches exist, including the following:"
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch21-01",
+      "chapter": 21,
+      "chapterTitle": "Chapter 21. Data Delivery and Reporting",
+      "priority": 1,
+      "topic": "报告面向决策",
+      "prompt": "给教练的报告最应突出什么？",
+      "options": [
+        {
+          "text": "尽可能多的图表和小数位",
+          "explanation": "复杂和精细不等于有用。"
+        },
+        {
+          "text": "不加说明地展示所有原始数据",
+          "explanation": "接收者可能无法识别重点。"
+        },
+        {
+          "text": "完全隐藏数据局限",
+          "explanation": "忽略不确定性可能导致过度决策。"
+        },
+        {
+          "text": "与当前决策相关的信息、情境和可执行建议",
+          "explanation": "报告应支持理解和行动，而非单纯展示复杂分析。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 617,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p617:b1",
+        "quote": "The ideal scenario is that the insights they communicate are useful for informing important decisions. In the elite sport context, the reality is that many decisions will have far-reaching consequences on a person’s aspirations (e.g., team selection decisions), daily experiences (e.g., decisions about preparation and recovery practices), health (e.g., illness and injury management), and livelihood (e.g., recruitment, contract terms)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch21-02",
+      "chapter": 21,
+      "chapterTitle": "Chapter 21. Data Delivery and Reporting",
+      "priority": 2,
+      "topic": "数据可视化",
+      "prompt": "比较多名运动员趋势时，哪项更有助于正确理解？",
+      "options": [
+        {
+          "text": "只使用装饰性三维效果",
+          "explanation": "装饰可能干扰准确比较。"
+        },
+        {
+          "text": "所有图都隐藏单位",
+          "explanation": "缺少单位限制解释和实际应用。"
+        },
+        {
+          "text": "使用清晰标注、一致尺度并保留情境",
+          "explanation": "图形设计应减少误读并使比较有意义。"
+        },
+        {
+          "text": "为了突出效果随意截断坐标且不标示",
+          "explanation": "不透明尺度会放大差异感受。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 607,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p607:b9",
+        "quote": "Delivering data insights through visualizations and reporting is fundamentally about communication. The quality and effectiveness of this communication require coordination and alignment between the characteristics of the recipient, the capabilities of the messenger, and the clarity and accuracy of the message."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch22-01",
+      "chapter": 22,
+      "chapterTitle": "Chapter 22. Performance Interventions and Operationalizing Data",
+      "priority": 1,
+      "topic": "从数据到干预",
+      "prompt": "监控发现潜在问题后，合理的工作流程是什么？",
+      "options": [
+        {
+          "text": "结合证据提出干预，再监测实施及结果",
+          "explanation": "数据应形成可检验的行动循环。"
+        },
+        {
+          "text": "报告异常后不再追踪",
+          "explanation": "缺少后续无法判断行动是否有效。"
+        },
+        {
+          "text": "把群体建议机械复制给每个人",
+          "explanation": "个体情境可能需要调整。"
+        },
+        {
+          "text": "只追求指标变好而忽略比赛需求",
+          "explanation": "代理指标改善未必转化为目标表现。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 648,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p648:b4",
+        "quote": "Whether gathering data or developing evidence-informed practice, the sport scientist is required to apply complex and sophisticated techniques in order to collect data and interpret this data to then inform training interventions and decision making."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch22-02",
+      "chapter": 22,
+      "chapterTitle": "Chapter 22. Performance Interventions and Operationalizing Data",
+      "priority": 2,
+      "topic": "干预效果核验",
+      "prompt": "实施恢复方案后某指标改善，为什么仍需谨慎解释？",
+      "options": [
+        {
+          "text": "指标改善意味着所有目标都改善",
+          "explanation": "不同结果之间未必同步变化。"
+        },
+        {
+          "text": "无需记录实施剂量和依从性",
+          "explanation": "实施过程是解释结果的重要依据。"
+        },
+        {
+          "text": "还需考虑自然波动、同期变化和实际表现",
+          "explanation": "单次前后比较不能排除其他解释。"
+        },
+        {
+          "text": "只要时间上在后就证明方案有效",
+          "explanation": "时间顺序不足以排除混杂。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 655,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p655:b1",
+        "quote": "and processes to individual athletes based on their needs; and provision of regular monitoring and reassessm"
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch23-01",
+      "chapter": 23,
+      "chapterTitle": "Chapter 23. Recovery and Sleep",
+      "priority": 1,
+      "topic": "睡眠与恢复",
+      "prompt": "改善恢复时，哪种策略更应优先评估？",
+      "options": [
+        {
+          "text": "所有运动员只要相同睡眠时长即可",
+          "explanation": "需求和实际质量存在差异。"
+        },
+        {
+          "text": "只依赖单晚手环评分作诊断",
+          "explanation": "设备估计需结合趋势和必要的专业评估。"
+        },
+        {
+          "text": "睡眠机会、规律与质量等基础因素",
+          "explanation": "睡眠是恢复的重要基础，应结合个体与赛程。"
+        },
+        {
+          "text": "用昂贵恢复设备替代睡眠",
+          "explanation": "设备不能替代基本睡眠需求。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 675,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p675:b1",
+        "quote": "The recovery pyramid is built on the foundation of sleep, followed by nutrition and hydration. These three areas have the potential for the greatest impact on athletic performance. This foundation can then be built upon by incorporating other strategies such as hydrotherapy, compression, and massage, which have been the focus of less research attention."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch23-02",
+      "chapter": 23,
+      "chapterTitle": "Chapter 23. Recovery and Sleep",
+      "priority": 2,
+      "topic": "恢复措施的情境",
+      "prompt": "选择冷水浸泡等恢复措施时，为什么要考虑训练目标？",
+      "options": [
+        {
+          "text": "不需要考虑运动员耐受与执行条件",
+          "explanation": "可行性和个体反应会影响实施。"
+        },
+        {
+          "text": "短期恢复与长期适应目标可能需要权衡",
+          "explanation": "恢复策略应随比赛密度、训练阶段和目标调整。"
+        },
+        {
+          "text": "同一措施必然适合每次训练",
+          "explanation": "不同情境的成本与收益可能不同。"
+        },
+        {
+          "text": "主观感觉改善就证明全部生理适应更好",
+          "explanation": "不同结果维度不能相互替代。"
+        }
+      ],
+      "correct": 1,
+      "source": {
+        "page": 677,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p677:b7",
+        "quote": "These water immersion strategies have been reasonably well examined in research to date, and the choice of which strategy to implement should be based on what the athletes are trying to recover from and for."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch24-01",
+      "chapter": 24,
+      "chapterTitle": "Chapter 24. Fueling and Nutrition",
+      "priority": 1,
+      "topic": "碳水与训练供能",
+      "prompt": "制定碳水化合物摄入策略时，较合理的原则是？",
+      "options": [
+        {
+          "text": "只看体重而忽略训练任务",
+          "explanation": "供能需求还受到负荷和目标影响。"
+        },
+        {
+          "text": "根据训练和比赛的强度、时长及恢复需求调整",
+          "explanation": "营养安排应服务具体供能与恢复目标。"
+        },
+        {
+          "text": "所有日子都必须完全相同",
+          "explanation": "不同训练需求可能需要不同摄入。"
+        },
+        {
+          "text": "增加脂肪氧化必然改善所有高强度表现",
+          "explanation": "底物利用变化不等同于所有任务表现提高。"
+        }
+      ],
+      "correct": 1,
+      "source": {
+        "page": 701,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p701:b0",
+        "quote": "For most of the time in the evolution of sports nutrition since about the 1960s, the spotlight has focused on carbohydrate-based strategies that attempt to increase body carbohydrate stores to meet the needs of the training session or event."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch24-02",
+      "chapter": 24,
+      "chapterTitle": "Chapter 24. Fueling and Nutrition",
+      "priority": 2,
+      "topic": "个体化补液",
+      "prompt": "制定训练补液计划时，应优先结合什么？",
+      "options": [
+        {
+          "text": "口渴与体重变化等信息完全无关",
+          "explanation": "多种实用信息可帮助评估补液需求。"
+        },
+        {
+          "text": "个体出汗损失、环境、时长与耐受",
+          "explanation": "补液需考虑个体和任务条件，避免机械照搬。"
+        },
+        {
+          "text": "所有人每小时固定同样水量",
+          "explanation": "出汗率和环境差异会改变需求。"
+        },
+        {
+          "text": "喝得越多就一定越安全",
+          "explanation": "过量饮水也可能产生风险。"
+        }
+      ],
+      "correct": 1,
+      "source": {
+        "page": 706,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p706:b5",
+        "quote": "During competition and practice: The typical goal is to prevent excessive dehydration (>2% body mass loss from water), and the practicality of achieving this depends on the likely rates of sweat loss (due to factors such as the intensity of exercise and environmental conditions), as well as the opportunities to drink during the session or event (availability of fluids, breaks in play or exercise, willingness to slow down to grab and consume a drink during continuous exercise, etc.)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch25-01",
+      "chapter": 25,
+      "chapterTitle": "Chapter 25. Environmental Stress",
+      "priority": 1,
+      "topic": "热适应",
+      "prompt": "热环境比赛前进行热适应，主要目的是什么？",
+      "options": [
+        {
+          "text": "保证完全没有热病风险",
+          "explanation": "适应不能消除所有风险。"
+        },
+        {
+          "text": "仅靠一次短时暴露就保证全部适应",
+          "explanation": "适应过程通常需要重复刺激和管理。"
+        },
+        {
+          "text": "只增加衣物而不监测安全",
+          "explanation": "热暴露需要适当的负荷与安全措施。"
+        },
+        {
+          "text": "通过计划性热暴露改善耐受和相关生理反应",
+          "explanation": "适应需要结合暴露剂量、时间和个体情况。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 726,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p726:b7",
+        "quote": "The majority (~95%) of the internal body and skin temperature adaptations occur in 5 to 8 days of HA (62). Sweat responses, including an increase in sweat rate and a decrease in sweat electrolyte concentration, occurs within 5 to 14 days (78)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch25-02",
+      "chapter": 25,
+      "chapterTitle": "Chapter 25. Environmental Stress",
+      "priority": 2,
+      "topic": "环境与补液评估",
+      "prompt": "同一运动员在不同环境的补液需求可能不同，主要原因是什么？",
+      "options": [
+        {
+          "text": "环境不会影响体温调节",
+          "explanation": "温度、湿度等条件会改变散热。"
+        },
+        {
+          "text": "出汗越少就绝对没有热风险",
+          "explanation": "出汗量不能单独排除热风险。"
+        },
+        {
+          "text": "一次测量就永久适用于所有条件",
+          "explanation": "需求会随环境、适应和任务变化。"
+        },
+        {
+          "text": "环境和运动任务会影响散热与出汗损失",
+          "explanation": "出汗率和热负担具有情境依赖性。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 724,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p724:b3",
+        "quote": "To dissipate heat, blood vessels vasodilate, skin blood flow increases, and the sweating response is initiated (5). Most heat dissipation is achieved via evaporation of sweat from the skin; however, this mechanism is hampered in extreme humidity (5)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch26-01",
+      "chapter": 26,
+      "chapterTitle": "Chapter 26. Psychobiology: Flow State as a Countermeasure to Mental Fatigue",
+      "priority": 1,
+      "topic": "心流与任务难度",
+      "prompt": "为了促进心流体验，任务挑战与技能应如何匹配？",
+      "options": [
+        {
+          "text": "挑战远超能力越好",
+          "explanation": "过高挑战可能引起焦虑。"
+        },
+        {
+          "text": "让目标和反馈尽量模糊",
+          "explanation": "不清晰的目标和反馈可能妨碍投入。"
+        },
+        {
+          "text": "挑战与能力相匹配，并有清晰目标和反馈",
+          "explanation": "适宜的挑战技能关系有助于投入任务。"
+        },
+        {
+          "text": "任务越简单越保证心流",
+          "explanation": "挑战不足可能导致无聊。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 751,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p751:b4",
+        "quote": "When the challenge is too high, the experience can be met with frustration or anxiety. If the challenge is too low, there can be boredom or disengagement. In flow, there is a perceived match between challenge and skill (or perhaps a slightly higher level of challenge relative to skill) that drives engagement in the task while maintaining a state of calm."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch26-02",
+      "chapter": 26,
+      "chapterTitle": "Chapter 26. Psychobiology: Flow State as a Countermeasure to Mental Fatigue",
+      "priority": 2,
+      "topic": "心理疲劳与表现",
+      "prompt": "长时间认知任务后运动表现下降，哪种解释更合理？",
+      "options": [
+        {
+          "text": "心理疲劳等同于所有形式的身体疲劳",
+          "explanation": "不同疲劳机制不应简单混同。"
+        },
+        {
+          "text": "只靠意志就必然消除疲劳影响",
+          "explanation": "动机不是排除认知疲劳效应的保证。"
+        },
+        {
+          "text": "心理疲劳可能影响注意、感知用力和任务执行",
+          "explanation": "心理与身体表现之间存在联系，应结合情境评估。"
+        },
+        {
+          "text": "只有肌肉损伤才可能使表现下降",
+          "explanation": "心理因素也可能影响表现。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 749,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p749:b5",
+        "quote": "Mental fatigue is a psychobiological state that can manifest as feelings of lethargy, disinterest, or decreased motivation and often results in a general reduction in cognitive or motor proficiency or both."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch27-01",
+      "chapter": 27,
+      "chapterTitle": "Chapter 27. Neuroscience Approach to Performance",
+      "priority": 1,
+      "topic": "神经可塑性",
+      "prompt": "神经可塑性对训练的主要启示是什么？",
+      "options": [
+        {
+          "text": "一次刺激即可永久学会任何技能",
+          "explanation": "适应和技能形成受练习与多因素影响。"
+        },
+        {
+          "text": "神经变化都必然转化为比赛收益",
+          "explanation": "迁移到实际表现仍需验证。"
+        },
+        {
+          "text": "神经系统能够随经验和练习发生适应",
+          "explanation": "学习与训练需要考虑经验依赖的神经变化。"
+        },
+        {
+          "text": "成年后神经系统完全不能改变",
+          "explanation": "可塑性并非只存在于儿童期。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 774,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p774:b1",
+        "quote": "This innate ability of the nervous system to reorganize its structural and functional circuits in response to constantly changing environmental conditions is known as neuroplasticity (35). Neuroplastic changes in the brain include changes in the state, activity, and connections of neurons, nerves, and neural networks in response to various stimuli (new information, experiences, development, or training)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch27-02",
+      "chapter": 27,
+      "chapterTitle": "Chapter 27. Neuroscience Approach to Performance",
+      "priority": 2,
+      "topic": "神经技术证据",
+      "prompt": "评估神经反馈等技术的应用价值，应重点看什么？",
+      "options": [
+        {
+          "text": "只看仪器价格和新颖程度",
+          "explanation": "成本和新颖性不能替代证据。"
+        },
+        {
+          "text": "完全忽略对照条件和学习效应",
+          "explanation": "这些因素可能解释观察到的改善。"
+        },
+        {
+          "text": "证据质量、适用情境及实际表现结果",
+          "explanation": "机制合理或指标改变并不自动证明比赛收益。"
+        },
+        {
+          "text": "宣传中出现脑图就足以证明有效",
+          "explanation": "图像呈现不是效果验证。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 781,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p781:b0",
+        "quote": "The variability of the results reflects the variety of NFT protocols, sports, and skill levels of the athletes involved in the studies conducted. Since every athlete has a different brain and every sport elicits different cognitive demands, the efficacy of NFT is bound to increase in the future as protocols are developed for specific sports and individual athletes (34)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch28-01",
+      "chapter": 28,
+      "chapterTitle": "Chapter 28. Motor Performance",
+      "priority": 1,
+      "topic": "外部注意焦点",
+      "prompt": "教练希望促进动作执行，哪条提示更符合外部注意焦点？",
+      "options": [
+        {
+          "text": "把球送向目标区域",
+          "explanation": "注意放在动作对环境的效果。"
+        },
+        {
+          "text": "用力收缩你的肱三头肌",
+          "explanation": "注意集中在身体部位及其动作。"
+        },
+        {
+          "text": "反复想象膝关节每一个角度",
+          "explanation": "这属于对身体运动本身的内部关注。"
+        },
+        {
+          "text": "时刻监控每根手指的肌肉张力",
+          "explanation": "这强调身体控制细节而非外部效果。"
+        }
+      ],
+      "correct": 0,
+      "source": {
+        "page": 808,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p808:b2",
+        "quote": "Since 1998, many studies have shown that adopting an external focus, that is, concentrating on the intended movement effect, enhances motor performance and learning compared with an internal focus on body movements (59)."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch28-02",
+      "chapter": 28,
+      "chapterTitle": "Chapter 28. Motor Performance",
+      "priority": 2,
+      "topic": "自主性支持",
+      "prompt": "在技能学习中支持运动员自主性，哪种做法更合适？",
+      "options": [
+        {
+          "text": "用虚假反馈保证所有尝试成功",
+          "explanation": "虚假反馈并非合理的学习支持。"
+        },
+        {
+          "text": "提供有意义的选择并维持明确目标",
+          "explanation": "自主性支持可通过适当选择促进学习和投入。"
+        },
+        {
+          "text": "完全取消所有指导和安全规则",
+          "explanation": "自主性不等于放弃结构与安全。"
+        },
+        {
+          "text": "只允许服从而不给任何选择",
+          "explanation": "这不属于自主性支持。"
+        }
+      ],
+      "correct": 1,
+      "source": {
+        "page": 805,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p805:b2",
+        "quote": "Performer autonomy is another variable that appears to be indispensable for optimal performance and learning. Conditions that give performers a sense of autonomy, for example, by providing them with choices, are beneficial for motor performance and learning."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch29-01",
+      "chapter": 29,
+      "chapterTitle": "Chapter 29. Sport Science of Injury",
+      "priority": 1,
+      "topic": "回归运动决策",
+      "prompt": "运动损伤后回归比赛，哪种原则更合理？",
+      "options": [
+        {
+          "text": "只要到预设日期就一定安全",
+          "explanation": "时间本身不能证明功能恢复。"
+        },
+        {
+          "text": "没有疼痛就保证完全恢复表现",
+          "explanation": "无痛不等于所有功能和比赛需求均已恢复。"
+        },
+        {
+          "text": "一个对称指标达标就排除所有风险",
+          "explanation": "单个指标不能覆盖全部能力与风险。"
+        },
+        {
+          "text": "结合功能、任务需求和多专业评估逐步决策",
+          "explanation": "回归是过程，不能只用单一时间或指标决定。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 819,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p819:b4",
+        "quote": "Moreover, it is necessary to take time to explore how sport scientists can work collaboratively with sports medicine professionals to employ methods that facilitate effective recovery from injury, culminating in a successful return to sport."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch29-02",
+      "chapter": 29,
+      "chapterTitle": "Chapter 29. Sport Science of Injury",
+      "priority": 2,
+      "topic": "肌腱问题与评估",
+      "prompt": "评估肌腱问题时，哪种认识更符合教材？",
+      "options": [
+        {
+          "text": "没有影像改变就不需评估功能",
+          "explanation": "功能和症状仍需单独评估。"
+        },
+        {
+          "text": "运动科学监测可独立替代临床诊断",
+          "explanation": "诊断应由具备资格的医疗专业人员完成。"
+        },
+        {
+          "text": "结构、疼痛和功能之间并非简单一一对应",
+          "explanation": "需要结合临床评估和任务功能解释。"
+        },
+        {
+          "text": "影像改变必然等于同等程度疼痛",
+          "explanation": "结构与症状不总是直接对应。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 830,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p830:b0",
+        "quote": "The etiology of tendinopathy remains unclear, with the cycle of events showing no direct relationship between structure, pain, and dysfunction (9); however, it is linked to stages of the tendinopathy continuum that has been developed for lower-limb tendinopathies."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch30-01",
+      "chapter": 30,
+      "chapterTitle": "Chapter 30. Interdisciplinary Support",
+      "priority": 1,
+      "topic": "跨学科与多学科",
+      "prompt": "跨学科支持与各专业分别工作相比，关键特点是什么？",
+      "options": [
+        {
+          "text": "一种专业完全取代其他专业",
+          "explanation": "跨学科不是取消不同专业价值。"
+        },
+        {
+          "text": "不同专业整合信息并形成协同决策",
+          "explanation": "跨学科强调跨边界协作而非仅把人员放在一起。"
+        },
+        {
+          "text": "每个专业只汇报自己的指标",
+          "explanation": "平行汇报不一定形成信息整合。"
+        },
+        {
+          "text": "同处一间办公室就必然实现协作",
+          "explanation": "空间接近不能替代目标、流程和沟通。"
+        }
+      ],
+      "correct": 1,
+      "source": {
+        "page": 850,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p850:b3",
+        "quote": "However, to consider sport performance merely through a multidisciplinary lens does not convey the important and complex interplay between the different components (i.e., multidisciplinary reflects a construct with many parts, but does not necessarily indicate relationships between those parts); only when all the factors come together in an integrated or interdisciplinary fashion can true optimal performances be achieved."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch30-02",
+      "chapter": 30,
+      "chapterTitle": "Chapter 30. Interdisciplinary Support",
+      "priority": 2,
+      "topic": "运动员中心模式",
+      "prompt": "团队采用运动员中心模式，应如何处理专业建议？",
+      "options": [
+        {
+          "text": "以某部门的设备利用率为最高目标",
+          "explanation": "部门指标不应取代运动员目标。"
+        },
+        {
+          "text": "排除运动员对方案的反馈",
+          "explanation": "个体体验和参与有助于实际落实。"
+        },
+        {
+          "text": "只优化一个生理指标而忽视生活和比赛",
+          "explanation": "整体支持需要考虑多维需求。"
+        },
+        {
+          "text": "围绕运动员需求、目标与情境共同协调",
+          "explanation": "专业支持应服务运动员整体发展与表现。"
+        }
+      ],
+      "correct": 3,
+      "source": {
+        "page": 854,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p854:b0",
+        "quote": "Instead, an athlete-centered approach must be adopted as a means to focus all the coaching and technical staff’s efforts on the singular objective of achieving success for the athlete or team. Philosophically, all support staff are required to elevate the rewards of success above their personal biases and those of their technical discipline."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch31-01",
+      "chapter": 31,
+      "chapterTitle": "Chapter 31. Information Dissemination",
+      "priority": 1,
+      "topic": "信息传播对象",
+      "prompt": "向教练传播研究结果时，较合理的做法是？",
+      "options": [
+        {
+          "text": "只追求传播次数而不检查理解",
+          "explanation": "覆盖量不等于信息被准确理解和使用。"
+        },
+        {
+          "text": "根据受众需求说明关键发现、局限与行动意义",
+          "explanation": "有效传播需使信息可理解并与受众决策相关。"
+        },
+        {
+          "text": "照搬论文术语和全部统计表",
+          "explanation": "技术细节堆砌可能妨碍理解。"
+        },
+        {
+          "text": "为了吸引注意隐藏不确定性",
+          "explanation": "夸大确定性会误导应用。"
+        }
+      ],
+      "correct": 1,
+      "source": {
+        "page": 892,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p892:b1",
+        "quote": "Thus, it is necessary to reconsider how to simplify the reports and the key information shared during both meetings and informal discussions by concentrating on the information the audience needs to know."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    },
+    {
+      "id": "cpss-ch31-02",
+      "chapter": 31,
+      "chapterTitle": "Chapter 31. Information Dissemination",
+      "priority": 2,
+      "topic": "可视化与信息筛选",
+      "prompt": "把研究做成信息图时，应优先确保什么？",
+      "options": [
+        {
+          "text": "图片越复杂就越科学",
+          "explanation": "复杂度不是证据质量。"
+        },
+        {
+          "text": "不需要说明信息来自哪里",
+          "explanation": "来源有助于核查和进一步理解。"
+        },
+        {
+          "text": "准确保留结论范围、重要情境与来源",
+          "explanation": "简化表达不能牺牲科学准确性和可追溯性。"
+        },
+        {
+          "text": "删除一切限制以使结论更醒目",
+          "explanation": "忽略适用范围可能造成误读。"
+        }
+      ],
+      "correct": 2,
+      "source": {
+        "page": 883,
+        "blockId": "01387ea3166a9dd0a7f29c1e4dd468f17a0afc14b4f7fd9786bb294f52256d1d:p883:b1",
+        "quote": "Infographics are graphical visual representations of information, data, or knowledge with the intention to present content in a clear and succinct fashion (see figure 31.2). Animations are a form of video that uses text and moving images to enhance visual learning."
+      },
+      "provenance": "AI-assisted original practice / textbook grounded"
+    }
+  ]
+}

@@ -5,7 +5,7 @@ import {mkdtemp,readFile,mkdir} from 'node:fs/promises'
 import {join,resolve} from 'node:path'
 import {tmpdir} from 'node:os'
 import {sha256File} from '../../src/storage/bundled-library'
-import type {BookDetail,Snapshot,PageData} from '../../src/shared/types'
+import type {BookDetail,Snapshot,PageData,PracticeState} from '../../src/shared/types'
 const require=createRequire(import.meta.url)
 test('preloaded textbook: first launch opens chapter one without import, full navigation/search, image decoding and restart',async()=>{
   const seed=resolve(process.env.CPSS_REAL_SEED||'.local/textbook-ready')
@@ -42,6 +42,17 @@ test('preloaded textbook: first launch opens chapter one without import, full na
       const title=chapter.title.replace(/^Chapter\s+\d+[.\s]*/i,'').replace(/\s/g,'').toLowerCase()
       expect(text,chapter.title).toContain(title)
     }
+    const bank=await page.evaluate(id=>window.desktop.call<PracticeState>('practice',id),manifest.bookId)
+    expect(bank.questions).toHaveLength(62)
+    // All citations must be exact excerpts of the matched edition and chapter.
+    for(const question of bank.questions){
+      const source=await page.evaluate(args=>window.desktop.call<PageData>('page',args),{bookId:manifest.bookId,page:question.source.page})
+      const normalize=(value:string)=>value.replace(/\s+/g,' ').trim()
+      expect(normalize(source.blocks.map(b=>b.text).join(' ')),question.id).toContain(normalize(question.source.quote))
+      expect(question.source.page).toBeGreaterThanOrEqual(chapters[question.chapter-1].page)
+      expect(question.source.page).toBeLessThan(chapters[question.chapter]?.page??901)
+    }
+    const chrome=await page.locator('.pdf-pane').boundingBox();expect(chrome!.y).toBeLessThan(90)
     await mkdir('.local/screenshots',{recursive:true})
     await page.screenshot({path:'.local/screenshots/textbook-ready.png',fullPage:true})
     // Page 31 contains a real JPEG2000 scientific illustration in this supplied edition.
@@ -71,6 +82,32 @@ test('preloaded textbook: first launch opens chapter one without import, full na
     await page.getByRole('button',{name:'学习记录',exact:true}).click()
     await expect(page.locator('.notes-panel')).toContainText('预置教材重启保留测试')
     await page.getByRole('button',{name:'功能导航',exact:true}).click()
+    await page.getByRole('button',{name:'练习题库',exact:true}).click()
+    await expect(page.locator('.question-detail')).toBeVisible()
+    await page.getByRole('combobox',{name:'练习章节'}).selectOption('31')
+    await expect(page.locator('.question-list>button')).toHaveCount(2)
+    await page.getByRole('combobox',{name:'练习章节'}).selectOption('1')
+    await page.locator('.question-list>button').first().click()
+    const first=bank.questions[0]
+    await page.getByRole('radio').nth((first.correct+1)%4).click()
+    await page.getByRole('button',{name:'提交答案',exact:true}).click()
+    await expect(page.locator('.answer-explanation')).toContainText('已自动加入错题集')
+    await expect(page.locator('.answer-explanation blockquote')).toContainText(first.source.quote)
+    await page.screenshot({path:'.local/screenshots/practice-0.4.0.png',fullPage:true})
+    await page.getByRole('button',{name:'错题集 1',exact:true}).click()
+    await expect(page.locator('.question-list>button')).toHaveCount(1)
+    await page.getByRole('radio').nth(first.correct).click()
+    await page.getByRole('button',{name:'提交答案',exact:true}).click()
+    await expect(page.locator('.answer-explanation')).toContainText('回答正确')
+    await expect(page.getByRole('button',{name:'错题集 0',exact:true})).toBeVisible()
+    await page.getByRole('button',{name:'章节练习',exact:true}).click()
+    await page.locator('.question-list>button').nth(1).click()
+    const second=bank.questions[1]
+    await page.getByRole('radio').nth((second.correct+1)%4).click()
+    await page.getByRole('button',{name:'提交答案',exact:true}).click()
+    await page.getByRole('button',{name:`查看原文 · PDF 第 ${second.source.page+1} 页`,exact:true}).click()
+    await expect(page.getByRole('spinbutton',{name:'PDF 页码'})).toHaveValue(String(second.source.page+1))
+    await page.getByRole('spinbutton',{name:'PDF 页码'}).fill('31')
     await page.getByRole('button',{name:'全文搜索',exact:true}).click()
     await page.locator('.global-search').fill('periodization')
     await expect(page.locator('.search-results button').first()).toBeVisible()
@@ -83,6 +120,8 @@ test('preloaded textbook: first launch opens chapter one without import, full na
     await page.getByRole('button',{name:'学习记录',exact:true}).click()
     await expect(page.locator('.notes-panel')).toContainText('预置教材重启保留测试')
     await expect(page.getByRole('spinbutton',{name:'PDF 页码'})).toHaveValue('31')
+    const restoredPractice=await page.evaluate(id=>window.desktop.call<PracticeState>('practice',id),manifest.bookId)
+    expect(restoredPractice.answers.map(a=>a.correct)).toEqual([false,true,false])
     const snapshot=await page.evaluate(()=>window.desktop.call<Snapshot>('snapshot'));expect(snapshot.books).toHaveLength(1);expect(snapshot.bootstrapError).toBeUndefined()
     expect(errors).toEqual([]);expect(codecErrors).toEqual([]);expect(requests.filter(url=>/^https?:/.test(url))).toEqual([])
     console.log(JSON.stringify({firstLaunchReadyMs:readyMs,pages:1058,chaptersChecked:31,parts:7,tocNodes:195,sourceHash:manifest.sourceHash,profileRecordsAreNotBundled:true}))

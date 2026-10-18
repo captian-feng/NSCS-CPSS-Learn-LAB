@@ -25,3 +25,6 @@ export interface DesktopAPI {
   onProgress(listener: (event: ImportEvent) => void): () => void;
 }
 declare global { interface Window { desktop: DesktopAPI } }
+export type PracticeQuestion = {id:string;chapter:number;chapterTitle:string;priority:number;topic:string;prompt:string;options:{text:string;explanation:string}[];correct:number;source:{page:number;blockId:string;quote:string};provenance:string}
+export type PracticeAnswer = {id:string;bookId:string;questionId:string;selected:number;correct:boolean;created:string}
+export type PracticeState = {questions:PracticeQuestion[];answers:PracticeAnswer[];version:string;available:boolean}

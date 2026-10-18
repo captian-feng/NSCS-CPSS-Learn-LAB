@@ -15,7 +15,7 @@ let service:Worker|undefined,window:BrowserWindow|undefined
 if(!app.requestSingleInstanceLock())app.exit(0)
 app.on('second-instance',()=>{if(window?.isMinimized())window.restore();window?.focus()})
 const pending=new Map<string,{resolve:(value:unknown)=>void;reject:(error:Error)=>void}>()
-const publicMethods=new Set(['snapshot','detail','page','search','saveRecord','removeRecord','position','progress','setting','pause','resume','report'])
+const publicMethods=new Set(['practice','answer','snapshot','detail','page','search','saveRecord','removeRecord','position','progress','setting','pause','resume','report'])
 function rpc<T=unknown>(method:string,args?:unknown):Promise<T> {
   return new Promise((resolve,reject)=>{
     if(!service){reject(new Error('本地数据服务不可用'));return}

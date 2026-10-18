@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import {practiceState,submitAnswer} from '../practice/engine'
 import { parentPort, workerData } from 'node:worker_threads'
 import { initializeBundledLibrary } from '../storage/bundled-library'
 import { LabStore } from '../storage/store'
@@ -15,6 +16,8 @@ const importer=new Importer(store,(event:ImportEvent)=>port.postMessage({type:'p
 const id=z.string().min(1).max(200)
 const page=z.number().int().nonnegative().max(100000)
 const methods:Record<string,(args:unknown)=>unknown>={
+  practice:args=>practiceState(store,id.parse(args)),
+  answer:args=>submitAnswer(store,args),
   snapshot:()=>({...store.snapshot(),bootstrapError}),
   detail:args=>store.detail(id.parse(args)),
   page:args=>{const a=z.object({bookId:id,page}).parse(args);return store.page(a.bookId,a.page)},
@@ -23,7 +26,7 @@ const methods:Record<string,(args:unknown)=>unknown>={
   removeRecord:args=>store.removeRecord(id.parse(args)),
   position:args=>{const a=z.object({bookId:id,page,blockId:z.string().max(200).optional()}).parse(args);store.savePosition(a.bookId,{page:a.page,blockId:a.blockId})},
   progress:args=>{const a=z.object({bookId:id,nodeId:id,status:z.enum(['未开始','学习中','已完成','需要复习'])}).parse(args);store.setProgress(a.bookId,a.nodeId,a.status)},
-  setting:args=>{const a=z.object({key:z.enum(['theme','fontSize','lineHeight','readerWidth','mode','lastBook','rightPanel']),value:z.union([z.string().max(300),z.number().finite(),z.boolean()])}).parse(args);store.setSetting(a.key,a.value)},
+  setting:args=>{const a=z.object({key:z.enum(['theme','fontSize','lineHeight','readerWidth','mode','lastBook','rightPanel','navWidth','tocWidth','notesWidth','pdfZoom']),value:z.union([z.string().max(300),z.number().finite(),z.boolean()])}).parse(args);store.setSetting(a.key,a.value)},
   pause:args=>importer.pause(id.parse(args)),
   resume:args=>{const bookId=id.parse(args);if(store.book(bookId).status==='missing')throw new Error('请先重新导入对应教材 PDF');void importer.resume(bookId)},
   report:args=>store.report(id.parse(args)),

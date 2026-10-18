@@ -19,9 +19,9 @@ export function useDocument(bookId:string|undefined) {
   return {document,error}
 }
 // Keep page geometry in the scroll flow, but only allocate canvases near the viewport.
-export function PDFPane({document,page,jumpRequest,records,onSelect,onPageChange}:{document:PDFDocumentProxy|null;page:number;jumpRequest:{page:number;serial:number};records:StudyRecord[];onSelect:(anchor:Anchor|null)=>void;onPageChange:(page:number)=>void}) {
+export function PDFPane({document,page,jumpRequest,records,onSelect,onPageChange,zoom,onZoom}:{document:PDFDocumentProxy|null;page:number;jumpRequest:{page:number;serial:number};records:StudyRecord[];onSelect:(anchor:Anchor|null)=>void;onPageChange:(page:number)=>void;zoom:number;onZoom:(value:number)=>void}) {
   const root=useRef<HTMLDivElement>(null),pagesRoot=useRef<HTMLDivElement>(null)
-  const [zoom,setZoom]=useState(1),[width,setWidth]=useState(600),[ratios,setRatios]=useState<number[]>([]),[geometryError,setGeometryError]=useState('')
+  const [width,setWidth]=useState(600),[ratios,setRatios]=useState<number[]>([]),[geometryError,setGeometryError]=useState('')
   const [visible,setVisible]=useState<Set<number>>(new Set())
   const frame=useRef(0),pageRef=useRef(page),lastJump=useRef(jumpRequest)
   pageRef.current=page
@@ -68,8 +68,15 @@ export function PDFPane({document,page,jumpRequest,records,onSelect,onPageChange
     const requested=lastJump.current!==jumpRequest?jumpRequest.page:pageRef.current
     lastJump.current=jumpRequest
     const destination=list.children[Math.min(document.numPages-1,requested)] as HTMLElement|undefined
-    if(destination)element.scrollTop=destination.offsetTop-48
+    if(destination)element.scrollTop=destination.offsetTop-12
   },[document,jumpRequest,width,zoom,ratios])
+  useEffect(()=>{
+    const element=root.current
+    if(!element)return
+    const wheel=(event:WheelEvent)=>{if(!event.ctrlKey)return;event.preventDefault();onZoom(zoom*Math.exp(-Math.max(-100,Math.min(100,event.deltaY))*.002))}
+    element.addEventListener('wheel',wheel,{passive:false})
+    return ()=>element.removeEventListener('wheel',wheel)
+  },[zoom,onZoom])
   useEffect(()=>()=>cancelAnimationFrame(frame.current),[])
   const scroll=()=>{
     cancelAnimationFrame(frame.current)
@@ -83,7 +90,7 @@ export function PDFPane({document,page,jumpRequest,records,onSelect,onPageChange
     })
   }
   return <div className="pdf-pane" ref={root} onScroll={scroll} aria-label="连续 PDF 阅读区">
-    <div className="pdf-tools"><span>原书 · PDF 第 {page+1} 页</span><button aria-label="缩小 PDF" onClick={()=>setZoom(z=>Math.max(.5,z-.15))}>−</button><span>{Math.round(zoom*100)}%</span><button aria-label="放大 PDF" onClick={()=>setZoom(z=>Math.min(3,z+.15))}>＋</button></div>
+
     {geometryError?<div className="error">{geometryError}</div>:!document||!ratios.length?<div className="loading">正在加载原书…</div>:<div className="pdf-pages" ref={pagesRoot}>
       {Array.from({length:document.numPages},(_,index)=><PDFPage key={index} document={document} page={index} width={pageWidth} aspect={ratios[index]} active={visible.has(index)} records={records.filter(r=>r.page===index)} onSelect={onSelect}/>)}
     </div>}

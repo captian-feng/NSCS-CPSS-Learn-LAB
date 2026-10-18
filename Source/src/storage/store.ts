@@ -3,6 +3,7 @@ import { mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { randomUUID } from 'node:crypto'
 import { z } from 'zod'
+import {answerSchema,persistAnswer} from '../practice/engine'
 import type { Anchor, Block, Book, BookDetail, PageData, Progress, SearchHit, Snapshot, StudyRecord, TocNode } from '../shared/types'
 
 const rect = z.tuple([z.number().finite(), z.number().finite(), z.number().finite(), z.number().finite()])
@@ -26,6 +27,7 @@ const backupSchema = z.object({
   records: z.array(recordSchema).max(100000),
   positions: z.array(z.object({ bookId: z.string(), value: z.object({ page: z.number().int().nonnegative(), blockId: z.string().optional() }) })),
   progress: z.array(z.object({ bookId: z.string(), nodeId: z.string(), status: z.enum(['未开始', '学习中', '已完成', '需要复习']) })),
+  practiceAnswers:z.array(answerSchema).max(100000).default([]),
   settings: z.record(z.string(), z.unknown())
 })
 export class LabStore {
@@ -149,11 +151,14 @@ export class LabStore {
       books: this.books().map(({ id, title, hash }) => ({ id, title, hash })),
       records: this.db.prepare('SELECT data FROM records').all().map(r => JSON.parse(String(r.data))),
       positions: this.db.prepare('SELECT * FROM positions').all().map(r => ({ bookId: r.book_id, value: JSON.parse(String(r.data)) })),
-      progress: this.db.prepare('SELECT book_id AS bookId,node_id AS nodeId,status FROM progress').all(), settings: this.snapshot().settings
+      progress: this.db.prepare('SELECT book_id AS bookId,node_id AS nodeId,status FROM progress').all(), settings: this.snapshot().settings,
+      practiceAnswers:this.db.prepare("SELECT data FROM answers ORDER BY json_extract(data,'$.created'),rowid").all().map(r=>answerSchema.parse(JSON.parse(String(r.data))))
     }
   }
   restore(input: unknown) {
     const backup = backupSchema.parse(input)
+    if(new Set(backup.practiceAnswers.map(a=>a.id)).size!==backup.practiceAnswers.length)throw new Error('备份包含重复答题编号')
+    for(const answer of backup.practiceAnswers){if(!backup.books.some(b=>b.id===answer.bookId))throw new Error('答题记录缺少教材身份')}
     if (new Set(backup.records.map(r => r.id)).size !== backup.records.length) throw new Error('备份包含重复记录 ID')
     return this.transaction(() => {
       let inserted = 0, skipped = 0
@@ -170,6 +175,7 @@ export class LabStore {
       for (const [key, value] of Object.entries(backup.settings)) this.db.prepare('INSERT OR IGNORE INTO settings VALUES(?,?)').run(key, JSON.stringify(value))
       // Preserve book identities even before the source PDF is re-imported.
       for (const book of backup.books) this.db.prepare("INSERT OR IGNORE INTO books(id,title,hash,status) VALUES(?,?,?,'missing')").run(book.id, book.title, book.hash)
+      for(const answer of backup.practiceAnswers){if(persistAnswer(this,answer))inserted++;else skipped++}
       return { inserted, skipped }
     })
   }
