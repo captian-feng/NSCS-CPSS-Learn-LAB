@@ -105,6 +105,7 @@ app.whenReady().then(async()=>{
     if((await stat(result.filePaths[0])).size>100*1024*1024)throw new Error('备份超过 100 MB，请检查所选文件')
     return rpc('restore',JSON.parse(await readFile(result.filePaths[0],'utf8')))
   })
+  ipcMain.handle('lab:open-reference',async(event,input:unknown)=>{assertSender(event);if(typeof input!=='string')throw new Error('无效链接');const url=new URL(input);if(url.protocol!=='https:'||url.hostname!=='www.nsca.com')throw new Error('仅支持官方参考链接');await shell.openExternal(url.href)})
   ipcMain.handle('lab:open-data',event=>{assertSender(event);return shell.openPath(app.getPath('userData'))})
   window=new BrowserWindow({width:1500,height:960,minWidth:980,minHeight:680,backgroundColor:'#f5f4ef',title:'CPSS LAB',webPreferences:{preload:join(here,'../preload/index.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true}})
   window.setMenuBarVisibility(false)

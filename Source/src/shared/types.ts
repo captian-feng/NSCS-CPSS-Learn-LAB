@@ -22,9 +22,10 @@ export interface DesktopAPI {
   exportData(format: 'json' | 'markdown'): Promise<string | null>;
   restoreData(): Promise<{ inserted: number; skipped: number } | null>;
   openDataFolder(): Promise<void>;
+  openReference(url:string):Promise<void>;
   onProgress(listener: (event: ImportEvent) => void): () => void;
 }
 declare global { interface Window { desktop: DesktopAPI } }
-export type PracticeQuestion = {id:string;chapter:number;chapterTitle:string;priority:number;topic:string;prompt:string;options:{text:string;explanation:string}[];correct:number;source:{page:number;blockId:string;quote:string};provenance:string}
+export type PracticeQuestion = {caseStudy?:{id:string;title:string;scenario:string;columns:string[];rows:string[][]};task:string;questionType:string;id:string;chapter:number;chapterTitle:string;priority:number;topic:string;prompt:string;options:{text:string;explanation:string}[];correct:number;source:{page:number;blockId:string;quote:string};provenance:string}
 export type PracticeAnswer = {id:string;bookId:string;questionId:string;selected:number;correct:boolean;created:string}
 export type PracticeState = {questions:PracticeQuestion[];answers:PracticeAnswer[];version:string;available:boolean}

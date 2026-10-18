@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { getDocument, GlobalWorkerOptions, TextLayer } from 'pdfjs-dist'
 import type { PDFDocumentProxy, RenderTask } from 'pdfjs-dist'
 import workerURL from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
@@ -19,7 +19,7 @@ export function useDocument(bookId:string|undefined) {
   return {document,error}
 }
 // Keep page geometry in the scroll flow, but only allocate canvases near the viewport.
-export function PDFPane({document,page,jumpRequest,records,onSelect,onPageChange,zoom,onZoom}:{document:PDFDocumentProxy|null;page:number;jumpRequest:{page:number;serial:number};records:StudyRecord[];onSelect:(anchor:Anchor|null)=>void;onPageChange:(page:number)=>void;zoom:number;onZoom:(value:number)=>void}) {
+export function PDFPane({document,page,jumpRequest,records,onSelect,onPageChange,zoom,onZoom,focusedRecord,onRecordClick}:{document:PDFDocumentProxy|null;page:number;jumpRequest:{page:number;serial:number;top?:number};records:StudyRecord[];onSelect:(anchor:Anchor|null)=>void;onPageChange:(page:number)=>void;zoom:number;onZoom:(value:number)=>void;focusedRecord:string;onRecordClick:(record:StudyRecord)=>void}) {
   const root=useRef<HTMLDivElement>(null),pagesRoot=useRef<HTMLDivElement>(null)
   const [width,setWidth]=useState(600),[ratios,setRatios]=useState<number[]>([]),[geometryError,setGeometryError]=useState('')
   const [visible,setVisible]=useState<Set<number>>(new Set())
@@ -62,13 +62,14 @@ export function PDFPane({document,page,jumpRequest,records,onSelect,onPageChange
     for(const child of list.children)observer.observe(child)
     return ()=>observer.disconnect()
   },[document,ratios])
-  useEffect(()=>{
+  useLayoutEffect(()=>{
     const element=root.current,list=pagesRoot.current
     if(!element||!list||!document)return
-    const requested=lastJump.current!==jumpRequest?jumpRequest.page:pageRef.current
+    const isJump=lastJump.current!==jumpRequest
+    const requested=isJump?jumpRequest.page:pageRef.current
     lastJump.current=jumpRequest
     const destination=list.children[Math.min(document.numPages-1,requested)] as HTMLElement|undefined
-    if(destination)element.scrollTop=destination.offsetTop-12
+    if(destination)element.scrollTop=destination.offsetTop+(isJump&&jumpRequest.top!==undefined?destination.clientHeight*jumpRequest.top-80:-12)
   },[document,jumpRequest,width,zoom,ratios])
   useEffect(()=>{
     const element=root.current
@@ -92,11 +93,11 @@ export function PDFPane({document,page,jumpRequest,records,onSelect,onPageChange
   return <div className="pdf-pane" ref={root} onScroll={scroll} aria-label="连续 PDF 阅读区">
 
     {geometryError?<div className="error">{geometryError}</div>:!document||!ratios.length?<div className="loading">正在加载原书…</div>:<div className="pdf-pages" ref={pagesRoot}>
-      {Array.from({length:document.numPages},(_,index)=><PDFPage key={index} document={document} page={index} width={pageWidth} aspect={ratios[index]} active={visible.has(index)} records={records.filter(r=>r.page===index)} onSelect={onSelect}/>)}
+      {Array.from({length:document.numPages},(_,index)=><PDFPage key={index} document={document} page={index} width={pageWidth} aspect={ratios[index]} active={visible.has(index)} records={records.filter(r=>r.page===index)} onSelect={onSelect} focusedRecord={focusedRecord} onRecordClick={onRecordClick}/>)}
     </div>}
   </div>
 }
-function PDFPage({document,page,width,aspect,active,records,onSelect}:{document:PDFDocumentProxy;page:number;width:number;aspect:number;active:boolean;records:StudyRecord[];onSelect:(anchor:Anchor|null)=>void}) {
+function PDFPage({document,page,width,aspect,active,records,onSelect,focusedRecord,onRecordClick}:{document:PDFDocumentProxy;page:number;width:number;aspect:number;active:boolean;records:StudyRecord[];onSelect:(anchor:Anchor|null)=>void;focusedRecord:string;onRecordClick:(record:StudyRecord)=>void}) {
   const canvas=useRef<HTMLCanvasElement>(null),layer=useRef<HTMLDivElement>(null)
   const [error,setError]=useState('')
   useEffect(()=>{
@@ -128,6 +129,6 @@ function PDFPage({document,page,width,aspect,active,records,onSelect}:{document:
     onSelect({revision:'pdfjs-layout-v1',mode:'pdf',page,quote:selection.toString(),rects})
   }
   return <div className="pdf-page" data-page-index={page} aria-label={`PDF 第 ${page+1} 页`} style={{width,height:width*aspect}} onMouseUp={select}>
-    {active?<><canvas ref={canvas}/><div className="textLayer" ref={layer}/>{error&&<div className="error">{error}</div>}<div className="pdf-marks">{records.filter(r=>r.anchor?.mode==='pdf').flatMap(r=>(r.anchor?.rects??[]).map((box,index)=><div key={`${r.id}-${index}`} className={`pdf-mark ${r.kind==='underline'?'under':''} ${r.color}`} style={{left:`${box[0]*100}%`,top:`${box[1]*100}%`,width:`${(box[2]-box[0])*100}%`,height:`${(box[3]-box[1])*100}%`}} title={r.text||r.anchor?.quote}/>))}</div></>:<div className="page-placeholder">PDF 第 {page+1} 页</div>}
+    {active?<><canvas ref={canvas}/><div className="textLayer" ref={layer}/>{error&&<div className="error">{error}</div>}<div className="pdf-marks">{records.filter(r=>r.anchor?.mode==='pdf').flatMap(r=>(r.anchor?.rects??[]).map((box,index)=><div key={`${r.id}-${index}`} onClick={()=>onRecordClick(r)} className={`pdf-mark ${focusedRecord===r.id?'focused':''} ${r.kind==='underline'?'under':''} ${r.color}`} style={{left:`${box[0]*100}%`,top:`${box[1]*100}%`,width:`${(box[2]-box[0])*100}%`,height:`${(box[3]-box[1])*100}%`}} title={r.text||r.anchor?.quote}/>))}</div></>:<div className="page-placeholder">PDF 第 {page+1} 页</div>}
   </div>
 }

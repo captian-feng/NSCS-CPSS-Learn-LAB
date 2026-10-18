@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('desktop',{
   choosePDF:()=>ipcRenderer.invoke('lab:choose-pdf'),
   exportData:(format:string)=>ipcRenderer.invoke('lab:export',format),
   restoreData:()=>ipcRenderer.invoke('lab:restore'),
+  openReference:(url:string)=>ipcRenderer.invoke('lab:open-reference',url),
   openDataFolder:()=>ipcRenderer.invoke('lab:open-data'),
   onProgress:(callback:(event:unknown)=>void)=>{
     const listener=(_event:unknown,data:unknown)=>callback(data)

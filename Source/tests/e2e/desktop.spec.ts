@@ -52,6 +52,17 @@ test('offline desktop: import, continuous PDF selection, annotation CRUD, search
     }
     await selectPDF();await w.getByTitle('yellow 高亮',{exact:true}).click()
     await expect(w.locator('.pdf-mark')).toHaveCount(1)
+    await w.getByRole('button',{name:'批注',exact:true}).click()
+    await expect(w.locator('.annotation-item')).toHaveCount(1)
+    await w.locator('.annotation-item').first().click()
+    await expect(w.locator('.inline-annotation-editor')).toBeVisible()
+    await w.getByRole('textbox',{name:'批注笔记内容'}).fill('Side annotation note persists')
+    await w.getByRole('button',{name:'保存批注',exact:true}).click()
+    await expect(w.locator('.annotation-item')).toContainText('Side annotation note persists')
+    await mkdir('.local/screenshots',{recursive:true})
+    await w.screenshot({path:'.local/screenshots/annotations-0.5.0.png',fullPage:true})
+    await w.getByRole('button',{name:'关闭批注编辑',exact:true}).click()
+    await w.getByRole('tab',{name:'目录',exact:true}).click()
     // Natural scrolling crosses the page boundary and persists the visible page.
     await w.locator('.pdf-pane').evaluate(element=>{const next=element.querySelector<HTMLElement>('[data-page-index="2"]')!;element.scrollTop=next.offsetTop-50})
     await expect(w.getByRole('spinbutton',{name:'PDF 页码'})).toHaveValue('3')
@@ -166,4 +177,35 @@ test('offline desktop: import, continuous PDF selection, annotation CRUD, search
     expect(errors).toEqual([])
     expect(requests.filter(url=>/^https?:/.test(url) && !(process.env.ELECTRON_RENDERER_URL && url.startsWith(process.env.ELECTRON_RENDERER_URL)))).toEqual([])
   }finally{await app?.close()}
+})
+
+test('document tabs isolate an annotation save from the next book',async()=>{
+  const root=await mkdtemp(join(tmpdir(),'cpss-tabs-')),one=await createFixture(join(root,'one.pdf'),4),two=await createFixture(join(root,'two.pdf'),5)
+  const env:Record<string,string>={...Object.fromEntries(Object.entries(process.env).filter((entry):entry is [string,string]=>entry[1]!==undefined)),CPSS_DATA_DIR:join(root,'profile'),XDG_CONFIG_HOME:join(root,'config')};delete env.ELECTRON_RUN_AS_NODE
+  const flags=process.platform==='linux'?['--no-sandbox','--headless','--ozone-platform=headless','--disable-gpu']:[]
+  const app=await electron.launch({executablePath:require('electron'),args:[...flags,'.'],env})
+  try{
+    const w=await app.firstWindow()
+    await app.evaluate(({dialog},file)=>{dialog.showOpenDialog=async()=>({canceled:false,filePaths:[file]})},one)
+    await w.getByRole('button',{name:'＋ 导入英文教材 PDF',exact:true}).click()
+    await expect(w.locator('.pdf-pane')).toBeVisible({timeout:30000})
+    const first=(await w.evaluate(()=>window.desktop.call<Snapshot>('snapshot'))).books[0].id
+    await w.getByRole('button',{name:'＋ 笔记',exact:true}).click();await w.locator('.modal textarea').fill('Book one draft');await w.getByRole('button',{name:'保存记录',exact:true}).click()
+    await w.getByRole('button',{name:'批注',exact:true}).click()
+    await app.evaluate(({dialog},file)=>{dialog.showOpenDialog=async()=>({canceled:false,filePaths:[file]})},two)
+    await w.getByTitle('导入教材',{exact:true}).click()
+    await expect(w.locator('.pdf-pane')).toBeVisible({timeout:30000})
+    await expect(w.locator('.compact-tools label')).toContainText('/ 5')
+    const second=(await w.evaluate(()=>window.desktop.call<Snapshot>('snapshot'))).books.find(b=>b.id!==first)!.id
+    await w.locator(`.document-tabs [data-book-id="${first}"]`).click()
+    await w.locator('.annotation-item').first().click()
+    await w.getByRole('textbox',{name:'批注笔记内容'}).fill('Saved while switching books')
+    await w.locator(`.document-tabs [data-book-id="${second}"]`).click()
+    await expect(w.locator('.compact-tools label')).toContainText('/ 5')
+    await expect(w.locator('.notes-heading small')).toHaveText('0')
+    const data=await w.evaluate(id=>window.desktop.call<BookDetail>('detail',id),first)
+    expect(data.records[0].text).toBe('Saved while switching books')
+    await w.locator(`.document-tabs [data-book-id="${first}"]`).click()
+    await expect(w.locator('.annotation-item')).toContainText('Saved while switching books')
+  }finally{await app.close()}
 })

@@ -5,15 +5,28 @@ import {tmpdir} from 'node:os'
 import {LabStore} from '../src/storage/store'
 import {practiceState,submitAnswer} from '../src/practice/engine'
 import bank from '../src/practice/bank.json'
+import blueprint from '../src/practice/blueprint.json'
+import legacy from './fixtures/legacy-practice-0.4.json'
 const roots:string[]=[],stores:LabStore[]=[]
 function open(root=mkdtempSync(join(tmpdir(),'cpss-practice-'))){if(!roots.includes(root))roots.push(root);const store=new LabStore(root);stores.push(store);return store}
 afterEach(()=>{for(const s of stores.splice(0))try{s.close()}catch{};for(const r of roots.splice(0))rmSync(r,{recursive:true,force:true})})
 describe('chapter practice and learning data',()=>{
- it('covers 31 chapters with two priorities, unique choices and source references',()=>{
-  expect(bank.questions).toHaveLength(62)
-  expect(new Set(bank.questions.map(q=>q.id)).size).toBe(62)
-  for(let ch=1;ch<=31;ch++)expect(bank.questions.filter(q=>q.chapter===ch).map(q=>q.priority)).toEqual([1,2])
-  for(const q of bank.questions){expect(q.options).toHaveLength(4);expect(new Set(q.options.map(o=>o.text)).size).toBe(4);expect(q.correct).toBeGreaterThanOrEqual(0);expect(q.correct).toBeLessThan(4);expect(q.source.quote.length).toBeGreaterThan(30);for(const o of q.options)expect(o.explanation.length).toBeGreaterThan(8)}
+ it('covers 31 chapters, all 2026 tasks and nine original case groups, unique choices and source references',()=>{
+  expect(bank.questions).toHaveLength(215)
+  expect(new Set(bank.questions.map(q=>q.id)).size).toBe(215)
+  for(let ch=1;ch<=31;ch++)expect(bank.questions.filter(q=>q.chapter===ch).length).toBeGreaterThanOrEqual(6)
+  const tasks=blueprint.domains.flatMap(d=>d.tasks.map(t=>t.id));expect(tasks).toHaveLength(24);expect(blueprint.domains.reduce((n,d)=>n+d.scoredItems,0)).toBe(100)
+  for(const task of tasks)expect(bank.questions.some(q=>q.task===task),task).toBe(true)
+  for(const q of bank.questions)expect(tasks).toContain(q.task)
+  const cases=bank.questions.filter(q=>'caseStudy' in q);expect(cases).toHaveLength(27);expect(new Set(cases.map(q=>'caseStudy' in q?q.caseStudy?.id:'')).size).toBe(9)
+  for(const q of bank.questions){expect(q.options).toHaveLength(4);expect(new Set(q.options.map(o=>o.text)).size).toBe(4);expect(q.correct).toBeGreaterThanOrEqual(0);expect(q.correct).toBeLessThan(4);expect(q.source.quote.length).toBeGreaterThan(30);for(const o of q.options)expect(o.explanation.length).toBeGreaterThan(3)}
+ })
+ it('preserves every 0.4 question ID, correct index and option meaning for saved attempts',()=>{
+  for(const old of legacy){const current=bank.questions.find(q=>q.id===old.id)!;expect(current).toBeTruthy();expect(current.correct).toBe(old.correct);expect(current.options).toEqual(old.options)}
+ })
+ it('keeps quantitative answers consistent with the stated arithmetic and units',()=>{
+  const examples:[string,string][]=[['02-03',`${45*6} AU`],['02-05',`${(2400-2000)/2000*100}%`],['06-03',`${(70-50)/10}`],['08-03',`${5/100*100}%`],['10-03',`${30/5} m/s`],['11-03',`${(8-2)/2} m/s²`],['12-03',`${200*.3} N·s`],['13-03',`${(160/80).toFixed(1)}`],['14-03',`${60+.7*(200-60)}次/分`],['19-03',`每1000小时${6/3000*1000}次`],['21-04',`${Math.round((10-9.5)/10*100)}%`],['23-03',`${7/8*100}%`],['24-03',`${6*70} g`],['25-03',`${(.6+.5).toFixed(1)} L/h`]]
+  for(const [id,value] of examples){const q=bank.questions.find(q=>q.id===`cpss-ch${id}`)!;expect(q.options[q.correct].text,id).toBe(value)}
  })
  it('scores on the server, persists retries, rejects foreign questions and duplicate mutations',()=>{
   const s=open(),id=bank.sourceHash;s.createBook(id,'Textbook',id)

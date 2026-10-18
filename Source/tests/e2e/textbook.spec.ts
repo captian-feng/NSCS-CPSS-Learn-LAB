@@ -43,7 +43,7 @@ test('preloaded textbook: first launch opens chapter one without import, full na
       expect(text,chapter.title).toContain(title)
     }
     const bank=await page.evaluate(id=>window.desktop.call<PracticeState>('practice',id),manifest.bookId)
-    expect(bank.questions).toHaveLength(62)
+    expect(bank.questions).toHaveLength(215)
     // All citations must be exact excerpts of the matched edition and chapter.
     for(const question of bank.questions){
       const source=await page.evaluate(args=>window.desktop.call<PageData>('page',args),{bookId:manifest.bookId,page:question.source.page})
@@ -84,8 +84,19 @@ test('preloaded textbook: first launch opens chapter one without import, full na
     await page.getByRole('button',{name:'功能导航',exact:true}).click()
     await page.getByRole('button',{name:'练习题库',exact:true}).click()
     await expect(page.locator('.question-detail')).toBeVisible()
+    await page.getByRole('button',{name:'大纲覆盖与来源',exact:true}).click()
+    await expect(page.locator('.coverage-panel tbody tr:not(.domain-row)')).toHaveCount(24)
+    await page.getByRole('button',{name:'大纲覆盖与来源',exact:true}).click()
+    await page.getByRole('combobox',{name:'考试领域'}).selectOption('4')
+    await page.getByRole('combobox',{name:'题型'}).selectOption('计算')
+    await expect(page.locator('.question-list>button').first()).toBeVisible()
+    await page.getByRole('combobox',{name:'考试领域'}).selectOption('all')
+    await page.getByRole('combobox',{name:'题型'}).selectOption('case-group')
+    await expect(page.locator('.case-study')).toBeVisible()
+    await page.screenshot({path:'.local/screenshots/case-0.5.0.png',fullPage:true})
+    await page.getByRole('combobox',{name:'题型'}).selectOption('all')
     await page.getByRole('combobox',{name:'练习章节'}).selectOption('31')
-    await expect(page.locator('.question-list>button')).toHaveCount(2)
+    await expect(page.locator('.question-list>button')).toHaveCount(9)
     await page.getByRole('combobox',{name:'练习章节'}).selectOption('1')
     await page.locator('.question-list>button').first().click()
     const first=bank.questions[0]
@@ -93,7 +104,7 @@ test('preloaded textbook: first launch opens chapter one without import, full na
     await page.getByRole('button',{name:'提交答案',exact:true}).click()
     await expect(page.locator('.answer-explanation')).toContainText('已自动加入错题集')
     await expect(page.locator('.answer-explanation blockquote')).toContainText(first.source.quote)
-    await page.screenshot({path:'.local/screenshots/practice-0.4.0.png',fullPage:true})
+    await page.screenshot({path:'.local/screenshots/practice-0.5.0.png',fullPage:true})
     await page.getByRole('button',{name:'错题集 1',exact:true}).click()
     await expect(page.locator('.question-list>button')).toHaveCount(1)
     await page.getByRole('radio').nth(first.correct).click()
@@ -102,7 +113,7 @@ test('preloaded textbook: first launch opens chapter one without import, full na
     await expect(page.getByRole('button',{name:'错题集 0',exact:true})).toBeVisible()
     await page.getByRole('button',{name:'章节练习',exact:true}).click()
     await page.locator('.question-list>button').nth(1).click()
-    const second=bank.questions[1]
+    const second=bank.questions.find(q=>q.id==='cpss-ch01-02')!
     await page.getByRole('radio').nth((second.correct+1)%4).click()
     await page.getByRole('button',{name:'提交答案',exact:true}).click()
     await page.getByRole('button',{name:`查看原文 · PDF 第 ${second.source.page+1} 页`,exact:true}).click()

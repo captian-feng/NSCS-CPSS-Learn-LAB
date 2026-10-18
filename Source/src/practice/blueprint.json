@@ -1,0 +1,135 @@
+{
+  "version": "CPSS DCO 2026",
+  "effectiveDate": "2026-07-01",
+  "checkedDate": "2026-10-18",
+  "sourceUrl": "https://www.nsca.com/globalassets/certification/cpss/nsca-cpss-dco-2026.pdf",
+  "examUrl": "https://www.nsca.com/certification/cpss/cpss-exam-description/",
+  "styleReferenceUrl": "https://www.nsca.com/cscs-exam-description/",
+  "note": "任务标题为中文概括；领域题量为官方100道计分题的分布，本库题量不是模拟考试配额。CSCS仅参考基础和应用的组织，不移植内容范围。",
+  "domains": [
+    {
+      "id": "1",
+      "title": "运动科学理论与过程",
+      "scoredItems": 24,
+      "tasks": [
+        {
+          "id": "1A",
+          "title": "应用表现与降伤原理"
+        },
+        {
+          "id": "1B",
+          "title": "用科学过程评价表现方案"
+        },
+        {
+          "id": "1C",
+          "title": "整合训练与运动员准备知识"
+        },
+        {
+          "id": "1D",
+          "title": "评估产品、技术和趋势"
+        },
+        {
+          "id": "1E",
+          "title": "批判评价研究适用性"
+        },
+        {
+          "id": "1F",
+          "title": "向相关人员传播研究"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "跨学科需求分析",
+      "scoredItems": 25,
+      "tasks": [
+        {
+          "id": "2A",
+          "title": "识别项目需求与约束"
+        },
+        {
+          "id": "2B",
+          "title": "协作制定关键表现指标"
+        },
+        {
+          "id": "2C",
+          "title": "建立画像、基准和里程碑"
+        },
+        {
+          "id": "2D",
+          "title": "配置资源与目标策略"
+        },
+        {
+          "id": "2E",
+          "title": "沟通需求分析结果"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "评估与监控",
+      "scoredItems": 29,
+      "tasks": [
+        {
+          "id": "3A",
+          "title": "数据采集伦理、所有权与许可"
+        },
+        {
+          "id": "3B",
+          "title": "解释评估系统的目的和应用"
+        },
+        {
+          "id": "3C",
+          "title": "评估环境、器材与流程安全"
+        },
+        {
+          "id": "3D",
+          "title": "评价效度、信度和可行性"
+        },
+        {
+          "id": "3E",
+          "title": "实施采集质量保证"
+        },
+        {
+          "id": "3F",
+          "title": "制定并遵守采集协议"
+        },
+        {
+          "id": "3G",
+          "title": "持续复核评估与干预效用"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "数据管理",
+      "scoredItems": 22,
+      "tasks": [
+        {
+          "id": "4A",
+          "title": "保护个人和组织信息"
+        },
+        {
+          "id": "4B",
+          "title": "规划采集、存储、分析和应用"
+        },
+        {
+          "id": "4C",
+          "title": "评价质量并规范清理"
+        },
+        {
+          "id": "4D",
+          "title": "分析建模及解释数据"
+        },
+        {
+          "id": "4E",
+          "title": "及时有效地提供反馈"
+        },
+        {
+          "id": "4F",
+          "title": "说明解释与结论的局限"
+        }
+      ]
+    }
+  ]
+}

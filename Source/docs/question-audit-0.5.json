@@ -1,0 +1,21 @@
+{
+  "version": "0.5.0",
+  "blueprint": "CPSS DCO 2026",
+  "effectiveDate": "2026-07-01",
+  "bankSha256": "fdb9b81613ad88aeb92839678dfb406da2ddfbe969cfe70240dd83f363a6394c",
+  "questions": 215,
+  "chapters": 31,
+  "officialTasksMapped": 24,
+  "caseGroups": 9,
+  "caseSubquestions": 27,
+  "types": {
+    "基础": 44,
+    "案例": 116,
+    "研究": 30,
+    "计算": 25
+  },
+  "citationsVerified": 215,
+  "legacyQuestionsPreserved": 62,
+  "independentExpertReview": false,
+  "exhaustiveExamCoverageClaim": false
+}
