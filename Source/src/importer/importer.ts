@@ -57,7 +57,7 @@ async function graphics(page:PDFPageProxy, viewport:number[]):Promise<Rect[]> {
   return boxes
 }
 export function openPDF(path:string) {
-  return getDocument({url:pathToFileURL(path).href,cMapUrl:join(pdfRoot,'cmaps/'),standardFontDataUrl:join(pdfRoot,'standard_fonts/'),wasmUrl:join(pdfRoot,'wasm/'),useSystemFonts:false,isEvalSupported:false}).promise
+  return getDocument({url:pathToFileURL(path).href,cMapUrl:join(pdfRoot,'cmaps')+'/',standardFontDataUrl:join(pdfRoot,'standard_fonts')+'/',wasmUrl:join(pdfRoot,'wasm')+'/',useSystemFonts:false,isEvalSupported:false}).promise
 }
 export class Importer {
   private running=new Set<string>()

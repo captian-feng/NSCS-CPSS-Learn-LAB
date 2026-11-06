@@ -3,7 +3,7 @@ import {mkdtempSync,rmSync} from 'node:fs'
 import {join} from 'node:path'
 import {tmpdir} from 'node:os'
 import {LabStore} from '../src/storage/store'
-import {practiceState,submitAnswer} from '../src/practice/engine'
+import {importCustomBank,practiceState,submitAnswer} from '../src/practice/engine'
 import bank from '../src/practice/bank.json'
 import blueprint from '../src/practice/blueprint.json'
 import legacy from './fixtures/legacy-practice-0.4.json'
@@ -11,6 +11,21 @@ const roots:string[]=[],stores:LabStore[]=[]
 function open(root=mkdtempSync(join(tmpdir(),'cpss-practice-'))){if(!roots.includes(root))roots.push(root);const store=new LabStore(root);stores.push(store);return store}
 afterEach(()=>{for(const s of stores.splice(0))try{s.close()}catch{};for(const r of roots.splice(0))rmSync(r,{recursive:true,force:true})})
 describe('chapter practice and learning data',()=>{
+ it('imports a textbook-specific bank, preserves attempts and restores it with backups',()=>{
+  const s=open(),id='e'.repeat(64),other='f'.repeat(64)
+  s.createBook(id,'New book',id);s.updateBook(id,{status:'ready',pages:2});s.createBook(other,'Other book',other);s.updateBook(other,{status:'ready',pages:2})
+  const custom={format:'cpss-lab-question-bank',schemaVersion:1,sourceHash:id,title:'Test bank',version:'1',questions:[{id:'q1',chapter:1,chapterTitle:'Chapter 1',topic:'Force',prompt:'What is force?',options:[{text:'A',explanation:'yes'},{text:'B',explanation:'no'},{text:'C',explanation:'no'},{text:'D',explanation:'no'}],correct:0,source:{page:0,quote:'Force is a concept.'}}]}
+  expect(()=>importCustomBank(s,other,custom)).toThrow('指纹')
+  expect(()=>importCustomBank(s,id,{...custom,questions:[{...custom.questions[0],source:{page:3,quote:'x'}}]})).toThrow('超出')
+  expect(importCustomBank(s,id,custom).questions).toHaveLength(1)
+  expect(importCustomBank(s,id,custom).builtin).toBe(false)
+  expect(submitAnswer(s,{id:'custom-answer',bookId:id,questionId:'q1',selected:0}).correct).toBe(true)
+  expect(()=>importCustomBank(s,id,{...custom,version:'2'})).toThrow('已有题库')
+  const target=open();target.restore(s.backup())
+  expect(practiceState(target,id).questions[0].id).toBe('q1')
+  expect(practiceState(target,id).answers[0].correct).toBe(true)
+  expect(practiceState(target,other).available).toBe(false)
+ })
  it('covers 31 chapters, all 2026 tasks and nine original case groups, unique choices and source references',()=>{
   expect(bank.questions).toHaveLength(215)
   expect(new Set(bank.questions.map(q=>q.id)).size).toBe(215)

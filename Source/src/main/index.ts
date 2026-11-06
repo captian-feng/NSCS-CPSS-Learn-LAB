@@ -15,7 +15,7 @@ let service:Worker|undefined,window:BrowserWindow|undefined
 if(!app.requestSingleInstanceLock())app.exit(0)
 app.on('second-instance',()=>{if(window?.isMinimized())window.restore();window?.focus()})
 const pending=new Map<string,{resolve:(value:unknown)=>void;reject:(error:Error)=>void}>()
-const publicMethods=new Set(['practice','answer','snapshot','detail','page','search','saveRecord','removeRecord','position','progress','setting','pause','resume','report'])
+const publicMethods=new Set(['practice','answer','snapshot','detail','renameBook','addManualToc','page','search','saveRecord','removeRecord','position','progress','setting','pause','resume','report'])
 function rpc<T=unknown>(method:string,args?:unknown):Promise<T> {
   return new Promise((resolve,reject)=>{
     if(!service){reject(new Error('本地数据服务不可用'));return}
@@ -98,6 +98,14 @@ app.whenReady().then(async()=>{
     await rename(result.filePath+'.partial',result.filePath)
     return result.filePath
   })
+  ipcMain.handle('lab:import-question-bank',async(event,bookId:unknown)=>{
+    assertSender(event)
+    if(typeof bookId!=='string' || !/^[a-f0-9]{64}$/.test(bookId))throw new Error('教材身份无效')
+    const result=await dialog.showOpenDialog(window!,{title:'导入教材题库',filters:[{name:'题库 JSON',extensions:['json']}],properties:['openFile']})
+    if(result.canceled || !result.filePaths[0])return null
+    if((await stat(result.filePaths[0])).size>20*1024*1024)throw new Error('题库文件超过 20 MB')
+    return rpc('importQuestionBank',{bookId,bank:JSON.parse(await readFile(result.filePaths[0],'utf8'))})
+  })
   ipcMain.handle('lab:restore',async event=>{
     assertSender(event)
     const result=await dialog.showOpenDialog(window!,{title:'恢复学习记录',filters:[{name:'CPSS LAB 备份',extensions:['json']}],properties:['openFile']})
@@ -107,6 +115,10 @@ app.whenReady().then(async()=>{
   })
   ipcMain.handle('lab:open-reference',async(event,input:unknown)=>{assertSender(event);if(typeof input!=='string')throw new Error('无效链接');const url=new URL(input);if(url.protocol!=='https:'||url.hostname!=='www.nsca.com')throw new Error('仅支持官方参考链接');await shell.openExternal(url.href)})
   ipcMain.handle('lab:open-data',event=>{assertSender(event);return shell.openPath(app.getPath('userData'))})
+  ipcMain.handle('lab:data-location',event=>{
+    assertSender(event)
+    return {path:app.getPath('userData'),kind:!app.isPackaged && process.env.CPSS_DATA_DIR?'custom':'default'}
+  })
   window=new BrowserWindow({width:1500,height:960,minWidth:980,minHeight:680,backgroundColor:'#f5f4ef',title:'CPSS LAB',webPreferences:{preload:join(here,'../preload/index.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true}})
   window.setMenuBarVisibility(false)
   window.webContents.setWindowOpenHandler(()=>({action:'deny'}))

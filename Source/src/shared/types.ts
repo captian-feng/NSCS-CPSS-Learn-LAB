@@ -19,13 +19,15 @@ export type ImportEvent = { bookId: string; processed: number; total: number; st
 export interface DesktopAPI {
   call<T = unknown>(method: string, args?: unknown): Promise<T>;
   choosePDF(): Promise<{ bookId: string } | null>;
+  importQuestionBank(bookId:string):Promise<PracticeState | null>;
   exportData(format: 'json' | 'markdown'): Promise<string | null>;
   restoreData(): Promise<{ inserted: number; skipped: number } | null>;
   openDataFolder(): Promise<void>;
+  dataLocation(): Promise<{path:string;kind:'custom'|'default'}>;
   openReference(url:string):Promise<void>;
   onProgress(listener: (event: ImportEvent) => void): () => void;
 }
 declare global { interface Window { desktop: DesktopAPI } }
 export type PracticeQuestion = {caseStudy?:{id:string;title:string;scenario:string;columns:string[];rows:string[][]};task:string;questionType:string;id:string;chapter:number;chapterTitle:string;priority:number;topic:string;prompt:string;options:{text:string;explanation:string}[];correct:number;source:{page:number;blockId:string;quote:string};provenance:string}
 export type PracticeAnswer = {id:string;bookId:string;questionId:string;selected:number;correct:boolean;created:string}
-export type PracticeState = {questions:PracticeQuestion[];answers:PracticeAnswer[];version:string;available:boolean}
+export type PracticeState = {questions:PracticeQuestion[];answers:PracticeAnswer[];version:string;available:boolean;builtin:boolean}

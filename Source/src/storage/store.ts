@@ -3,7 +3,7 @@ import { mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { randomUUID } from 'node:crypto'
 import { z } from 'zod'
-import {answerSchema,persistAnswer} from '../practice/engine'
+import {answerSchema,customBankSchema,persistAnswer} from '../practice/engine'
 import type { Anchor, Block, Book, BookDetail, PageData, Progress, SearchHit, Snapshot, StudyRecord, TocNode } from '../shared/types'
 
 const rect = z.tuple([z.number().finite(), z.number().finite(), z.number().finite(), z.number().finite()])
@@ -21,6 +21,10 @@ export const recordSchema = z.object({
   color: z.enum(['yellow', 'green', 'blue', 'pink']), important: z.boolean(),
   due: z.string().max(40), done: z.boolean(), updated: z.string().max(50)
 })
+const manualTocSchema=z.object({
+  id:z.string().min(1).max(200),bookId:z.string().min(1).max(200),parentId:z.null(),
+  title:z.string().trim().min(1).max(200),page:z.number().int().nonnegative(),level:z.literal(0),source:z.literal('manual')
+}).strict()
 const backupSchema = z.object({
   format: z.literal('cpss-lab'), schemaVersion: z.literal(1), created: z.string(),
   books: z.array(z.object({ id: z.string(), title: z.string(), hash: z.string() })),
@@ -28,6 +32,8 @@ const backupSchema = z.object({
   positions: z.array(z.object({ bookId: z.string(), value: z.object({ page: z.number().int().nonnegative(), blockId: z.string().optional() }) })),
   progress: z.array(z.object({ bookId: z.string(), nodeId: z.string(), status: z.enum(['未开始', '学习中', '已完成', '需要复习']) })),
   practiceAnswers:z.array(answerSchema).max(100000).default([]),
+  customBanks:z.array(z.object({bookId:z.string(),bank:customBankSchema})).max(10000).default([]),
+  manualToc:z.array(manualTocSchema).max(100000).default([]),
   settings: z.record(z.string(), z.unknown())
 })
 export class LabStore {
@@ -51,6 +57,7 @@ export class LabStore {
       CREATE TABLE IF NOT EXISTS translation_links(id TEXT PRIMARY KEY,source_book TEXT NOT NULL,source_block TEXT NOT NULL,target_book TEXT NOT NULL,target_block TEXT NOT NULL,status TEXT NOT NULL DEFAULT 'unreviewed');
       CREATE TABLE IF NOT EXISTS question_banks(id TEXT PRIMARY KEY,title TEXT NOT NULL,provenance TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS questions(id TEXT PRIMARY KEY,bank_id TEXT NOT NULL,data TEXT NOT NULL);
+      CREATE TABLE IF NOT EXISTS custom_practice_banks(book_id TEXT PRIMARY KEY,data TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS practice_sessions(id TEXT PRIMARY KEY,data TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS answers(id TEXT PRIMARY KEY,session_id TEXT NOT NULL,question_id TEXT NOT NULL,data TEXT NOT NULL);
       INSERT OR IGNORE INTO meta VALUES('schema_version','1');`)
@@ -72,6 +79,12 @@ export class LabStore {
   }
   createBook(id: string, title: string, hash: string) {
     this.db.prepare("INSERT OR IGNORE INTO books(id,title,hash,status) VALUES(?,?,?,'copying')").run(id, title, hash)
+  }
+  renameBook(id:string, title:string):Book {
+    const value=z.string().trim().min(1).max(200).parse(title)
+    this.book(id)
+    this.db.prepare('UPDATE books SET title=? WHERE id=?').run(value,id)
+    return this.book(id)
   }
   updateBook(id: string, patch: Partial<Pick<Book, 'pages' | 'processed' | 'status' | 'error'>>) {
     const allowed = ['pages', 'processed', 'status', 'error'] as const
@@ -113,10 +126,18 @@ export class LabStore {
   }
   setToc(bookId: string, nodes: TocNode[]) {
     this.transaction(() => {
-      this.db.prepare('DELETE FROM toc WHERE book_id=?').run(bookId)
+      this.db.prepare("DELETE FROM toc WHERE book_id=? AND COALESCE(json_extract(data,'$.source'),'') <> 'manual'").run(bookId)
       const statement = this.db.prepare('INSERT INTO toc VALUES(?,?,?)')
       for (const node of nodes) statement.run(node.id, bookId, JSON.stringify(node))
     })
+  }
+  addManualToc(bookId:string,title:string,page:number):TocNode {
+    const book=this.book(bookId)
+    if(book.status!=='ready')throw new Error('请先完成教材导入')
+    if(!Number.isInteger(page)||page<0||page>=book.pages)throw new Error('章节页码超出教材范围')
+    const node=manualTocSchema.parse({id:randomUUID(),bookId,parentId:null,title,page,level:0,source:'manual'})
+    this.db.prepare('INSERT INTO toc VALUES(?,?,?)').run(node.id,bookId,JSON.stringify(node))
+    return node
   }
   saveRecord(input: unknown): StudyRecord {
     const record = recordSchema.parse(input)
@@ -134,7 +155,10 @@ export class LabStore {
     const words = query.trim().match(/[\p{L}\p{N}]+/gu)?.slice(0, 20) ?? []
     if (!words.length) return []
     const match = words.map(word => `"${word}"*`).join(' AND ')
-    const text = this.db.prepare('SELECT id,page,text FROM text_search WHERE text_search MATCH ? AND book_id=? ORDER BY rank LIMIT 60').all(match, bookId).map(r => ({ id: String(r.id), page: Number(r.page), text: String(r.text), type: 'text' as const }))
+    const rows = /\p{Script=Han}/u.test(query)
+      ? this.db.prepare(`SELECT id,page,text FROM blocks WHERE book_id=? AND ${words.map(() => 'instr(lower(text),lower(?)) > 0').join(' AND ')} ORDER BY page,ord LIMIT 60`).all(bookId, ...words)
+      : this.db.prepare('SELECT id,page,text FROM text_search WHERE text_search MATCH ? AND book_id=? ORDER BY rank LIMIT 60').all(match, bookId)
+    const text = rows.map(r => ({ id: String(r.id), page: Number(r.page), text: String(r.text), type: 'text' as const }))
     const notes = this.records(bookId).filter(r => `${r.text} ${r.anchor?.quote ?? ''}`.toLocaleLowerCase().includes(query.toLocaleLowerCase())).slice(0, 30).map(r => ({ id: r.id, page: r.page, text: `${r.anchor?.quote ?? ''} ${r.text}`, type: 'note' as const }))
     return [...text, ...notes]
   }
@@ -152,11 +176,17 @@ export class LabStore {
       records: this.db.prepare('SELECT data FROM records').all().map(r => JSON.parse(String(r.data))),
       positions: this.db.prepare('SELECT * FROM positions').all().map(r => ({ bookId: r.book_id, value: JSON.parse(String(r.data)) })),
       progress: this.db.prepare('SELECT book_id AS bookId,node_id AS nodeId,status FROM progress').all(), settings: this.snapshot().settings,
-      practiceAnswers:this.db.prepare("SELECT data FROM answers ORDER BY json_extract(data,'$.created'),rowid").all().map(r=>answerSchema.parse(JSON.parse(String(r.data))))
+      practiceAnswers:this.db.prepare("SELECT data FROM answers ORDER BY json_extract(data,'$.created'),rowid").all().map(r=>answerSchema.parse(JSON.parse(String(r.data)))),
+      customBanks:this.db.prepare('SELECT book_id,data FROM custom_practice_banks').all().map(r=>({bookId:String(r.book_id),bank:customBankSchema.parse(JSON.parse(String(r.data)))})),
+      manualToc:this.db.prepare("SELECT data FROM toc WHERE json_extract(data,'$.source')='manual'").all().map(r=>manualTocSchema.parse(JSON.parse(String(r.data))))
     }
   }
   restore(input: unknown) {
     const backup = backupSchema.parse(input)
+    if(new Set(backup.manualToc.map(n=>n.id)).size!==backup.manualToc.length)throw new Error('备份包含重复章节编号')
+    for(const node of backup.manualToc){if(!backup.books.some(b=>b.id===node.bookId))throw new Error('章节缺少教材身份')}
+    if(new Set(backup.customBanks.map(b=>b.bookId)).size!==backup.customBanks.length)throw new Error('备份包含重复教材题库')
+    for(const entry of backup.customBanks){if(!backup.books.some(b=>b.id===entry.bookId&&b.hash===entry.bank.sourceHash))throw new Error('题库与教材身份不一致')}
     if(new Set(backup.practiceAnswers.map(a=>a.id)).size!==backup.practiceAnswers.length)throw new Error('备份包含重复答题编号')
     for(const answer of backup.practiceAnswers){if(!backup.books.some(b=>b.id===answer.bookId))throw new Error('答题记录缺少教材身份')}
     if (new Set(backup.records.map(r => r.id)).size !== backup.records.length) throw new Error('备份包含重复记录 ID')
@@ -175,6 +205,19 @@ export class LabStore {
       for (const [key, value] of Object.entries(backup.settings)) this.db.prepare('INSERT OR IGNORE INTO settings VALUES(?,?)').run(key, JSON.stringify(value))
       // Preserve book identities even before the source PDF is re-imported.
       for (const book of backup.books) this.db.prepare("INSERT OR IGNORE INTO books(id,title,hash,status) VALUES(?,?,?,'missing')").run(book.id, book.title, book.hash)
+      for(const node of backup.manualToc){
+        const current=this.jsonRow('SELECT data FROM toc WHERE id=?',node.id)
+        if(current){if(JSON.stringify(current)!==JSON.stringify(node))throw new Error('备份章节与当前资料冲突，已取消恢复');skipped++;continue}
+        const book=this.book(node.bookId)
+        if(book.pages>0&&node.page>=book.pages)throw new Error('备份章节页码超出教材范围')
+        this.db.prepare('INSERT INTO toc VALUES(?,?,?)').run(node.id,node.bookId,JSON.stringify(node));inserted++
+      }
+      for (const entry of backup.customBanks) {
+        const current=this.db.prepare('SELECT data FROM custom_practice_banks WHERE book_id=?').get(entry.bookId)
+        const data=JSON.stringify(entry.bank)
+        if(current && current.data!==data)throw new Error('备份题库与当前资料冲突，已取消恢复')
+        if(!current)this.db.prepare('INSERT INTO custom_practice_banks VALUES(?,?)').run(entry.bookId,data)
+      }
       for(const answer of backup.practiceAnswers){if(persistAnswer(this,answer))inserted++;else skipped++}
       return { inserted, skipped }
     })

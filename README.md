@@ -1,5 +1,9 @@
 # CPSS LAB 0.5.0 — 桌面批注与 CPSS 2026 题库
 
+## 当前源码进展
+
+`Source/` 包含多教材导入、题库导入、中文检索、手动章节及资料管理的开发中更新。自动出题和 OCR 等功能仍在开发。以下 Delivery 下载包仍为 0.5.0，不包含这些源码更新。源码构建方法见 `Source/README.md`。
+
 ## Windows 下载和启动
 
 1. 登录GitHub，[下载完整0.5.0](https://github.com/captian-feng/CPSS-LAB-Private/archive/refs/tags/cpss-lab-v0.5.0.zip)。也可点击绿色 Code → Download ZIP 获取仓库最新版。

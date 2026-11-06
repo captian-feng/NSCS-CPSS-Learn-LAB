@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import {practiceState,submitAnswer} from '../practice/engine'
+import {importCustomBank,practiceState,submitAnswer} from '../practice/engine'
 import { parentPort, workerData } from 'node:worker_threads'
 import { initializeBundledLibrary } from '../storage/bundled-library'
 import { LabStore } from '../storage/store'
@@ -17,9 +17,12 @@ const id=z.string().min(1).max(200)
 const page=z.number().int().nonnegative().max(100000)
 const methods:Record<string,(args:unknown)=>unknown>={
   practice:args=>practiceState(store,id.parse(args)),
+  importQuestionBank:args=>{const a=z.object({bookId:id,bank:z.unknown()}).parse(args);return importCustomBank(store,a.bookId,a.bank)},
   answer:args=>submitAnswer(store,args),
   snapshot:()=>({...store.snapshot(),bootstrapError}),
   detail:args=>store.detail(id.parse(args)),
+  renameBook:args=>{const a=z.object({bookId:id,title:z.string()}).parse(args);return store.renameBook(a.bookId,a.title)},
+  addManualToc:args=>{const a=z.object({bookId:id,title:z.string(),page}).parse(args);return store.addManualToc(a.bookId,a.title,a.page)},
   page:args=>{const a=z.object({bookId:id,page}).parse(args);return store.page(a.bookId,a.page)},
   search:args=>{const a=z.object({bookId:id,query:z.string().max(500)}).parse(args);return store.search(a.bookId,a.query)},
   saveRecord:args=>store.saveRecord(args),
