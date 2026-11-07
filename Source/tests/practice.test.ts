@@ -19,6 +19,8 @@ describe('chapter practice and learning data',()=>{
   s.putPage(id,{page:0,width:600,height:800,label:'1',status:'text',issues:[],regions:[],blocks:[{id:'b',bookId:id,page:0,order:0,kind:'paragraph',text:'Text from source and more',runs:[{text:'Text from source and more'}],rect:[0,0,100,20],level:0}]})
   expect(verifyQuestionSource(s,{bookId:id,questionId:'q'}).status).toBe('matched')
   expect(verifyBankSources(s,id)).toMatchObject([{questionId:'q',status:'matched',page:0}])
+  s.putPage(id,{page:0,width:600,height:800,label:'1',status:'text',issues:[],regions:[],blocks:['Text from','source and more'].map((text,order)=>({id:`split-${order}`,bookId:id,page:0,order,kind:'paragraph' as const,text,runs:[{text}],rect:[0,0,100,20] as [number,number,number,number],level:0}))})
+  expect(verifyQuestionSource(s,{bookId:id,questionId:'q'})).toMatchObject({status:'matched',message:expect.stringContaining('忽略空白')})
   s.putPage(id,{page:0,width:600,height:800,label:'1',status:'text',issues:[],regions:[],blocks:[{id:'b',bookId:id,page:0,order:0,kind:'paragraph',text:'Different text',runs:[{text:'Different text'}],rect:[0,0,100,20],level:0}]})
   expect(verifyQuestionSource(s,{bookId:id,questionId:'q'}).status).toBe('not-found')
   expect(verifyBankSources(s,id)[0].status).toBe('not-found')

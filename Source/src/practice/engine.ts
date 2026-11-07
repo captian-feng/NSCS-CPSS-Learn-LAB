@@ -83,8 +83,10 @@ function checkSource(store:LabStore,book:Book,question:PracticeQuestion,cache:Ma
   const text=cache.get(question.source.page)
   if(text===null || text===undefined)return {status:'unavailable' as const,page:question.source.page,message:'来源页尚未处理，无法核验。'}
   if(!text.trim())return {status:'unavailable' as const,page:question.source.page,message:'来源页没有可提取文本，需人工对照原书。'}
-  const found=text.includes(question.source.quote)
-  return {status:found?'matched' as const:'not-found' as const,page:question.source.page,message:found?'引用与本页提取文字逐字匹配；仍需人工核对上下文和答案。':'未在本页提取文字中找到完整引用，请对照原书检查页码和内容。'}
+  const exact=text.includes(question.source.quote)
+  const normalize=(value:string)=>value.replace(/\s+/g,' ').trim()
+  const found=exact||normalize(text).includes(normalize(question.source.quote))
+  return {status:found?'matched' as const:'not-found' as const,page:question.source.page,message:found?(exact?'引用与本页提取文字逐字匹配；仍需人工核对上下文和答案。':'引用忽略空白与换行差异后匹配；仍需人工核对原文、上下文和答案。'):'未在本页提取文字中找到完整引用，请对照原书检查页码和内容。'}
 }
 export function verifyQuestionSource(store:LabStore,input:unknown) {
   const args=z.object({bookId:z.string().min(1).max(200),questionId:z.string().min(1).max(200)}).parse(input)
