@@ -48,7 +48,6 @@ export function publishDraft(store:LabStore,input:unknown):PracticeState {
   const args=z.object({bookId:z.string().min(1).max(200),expected:savedDraftSchema,chapter:z.number().int().positive().max(100000),chapterTitle:z.string().trim().min(1).max(200)}).parse(input)
   store.transaction(()=>{
     const book=store.book(args.bookId)
-    if(book.hash===bank.sourceHash)throw new Error('原有 CPSS 题库的扩展功能正在开发')
     if(book.status!=='ready'||args.expected.bookId!==book.id||args.expected.page>=book.pages)throw new Error('教材或来源页面尚未准备好')
     const current=store.jsonRow('SELECT data FROM question_drafts WHERE id=? AND book_id=?',args.expected.id,book.id)
     if(!current||JSON.stringify(savedDraftSchema.parse(current))!==JSON.stringify(args.expected))throw new Error('草稿已更改，请重新打开后发布')
@@ -70,7 +69,9 @@ export function practiceState(store:LabStore,bookId:string):PracticeState {
   const builtin=book.hash===bank.sourceHash
   const row=store.db.prepare('SELECT data FROM custom_practice_banks WHERE book_id=?').get(bookId)
   const custom=row?customBankSchema.parse(JSON.parse(String(row.data))):null
-  const questions=builtin?bank.questions:custom?.questions.map(q=>({...q,task:'',questionType:'基础',priority:1,source:{...q.source,blockId:''},provenance:custom.title}))??[]
+  const extra=custom?.questions.map(q=>({...q,task:'',questionType:'基础',priority:1,source:{...q.source,blockId:''},provenance:custom.title}))??[]
+  if(builtin&&extra.some(question=>bank.questions.some(original=>original.id===question.id)))throw new Error('自编题号与 CPSS 内置题库冲突，请检查书库备份')
+  const questions=builtin?[...bank.questions,...extra]:extra
   return {available:builtin||!!custom,builtin,version:builtin?bank.version:custom?.version??'',questions,answers:store.db.prepare("SELECT data FROM answers WHERE session_id=? ORDER BY json_extract(data,'$.created'),rowid").all('practice-'+bookId).map(r=>answerSchema.parse(JSON.parse(String(r.data))))}
 }
 function checkSource(store:LabStore,book:Book,question:PracticeQuestion,cache:Map<number,string|null>) {

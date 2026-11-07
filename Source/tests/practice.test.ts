@@ -3,7 +3,7 @@ import {mkdtempSync,rmSync} from 'node:fs'
 import {join} from 'node:path'
 import {tmpdir} from 'node:os'
 import {LabStore,newRecord} from '../src/storage/store'
-import {importCustomBank,practiceState,snapshotRevision,submitAnswer,verifyQuestionSource,verifyBankSources} from '../src/practice/engine'
+import {importCustomBank,practiceState,publishDraft,snapshotRevision,submitAnswer,verifyQuestionSource,verifyBankSources} from '../src/practice/engine'
 import bank from '../src/practice/bank.json'
 import blueprint from '../src/practice/blueprint.json'
 import legacy from './fixtures/legacy-practice-0.4.json'
@@ -11,6 +11,19 @@ const roots:string[]=[],stores:LabStore[]=[]
 function open(root=mkdtempSync(join(tmpdir(),'cpss-practice-'))){if(!roots.includes(root))roots.push(root);const store=new LabStore(root);stores.push(store);return store}
 afterEach(()=>{for(const s of stores.splice(0))try{s.close()}catch{};for(const r of roots.splice(0))rmSync(r,{recursive:true,force:true})})
 describe('chapter practice and learning data',()=>{
+ it('adds a reviewed question to CPSS without changing built-in questions or attempts',()=>{
+  const s=open(),id=bank.sourceHash;s.createBook(id,'CPSS',id);s.updateBook(id,{status:'ready',pages:1058})
+  const original=practiceState(s,id).questions[0],answer=submitAnswer(s,{id:'original',bookId:id,questionId:original.id,selected:original.correct})
+  const text='Original source for a manual question.'
+  s.putPage(id,{page:0,width:600,height:800,label:'1',status:'text',issues:[],regions:[],blocks:[{id:'b',bookId:id,page:0,order:0,kind:'paragraph',text,runs:[{text}],rect:[0,0,100,20],level:0}]})
+  const draft=s.saveQuestionDraft(id,{page:0,model:'手工创建',topic:'新知识点',prompt:'新题目',options:[{text:'A',explanation:'yes'},{text:'B',explanation:'no'},{text:'C',explanation:'no'},{text:'D',explanation:'no'}],correct:0,quote:text})
+  const state=publishDraft(s,{bookId:id,expected:draft,chapter:1,chapterTitle:'第一章'})
+  expect(state.questions).toHaveLength(216);expect(state.questions[0]).toEqual(original);expect(state.answers[0]).toEqual(answer)
+  expect(publishDraft(s,{bookId:id,expected:draft,chapter:1,chapterTitle:'第一章'}).questions).toHaveLength(216)
+  expect(submitAnswer(s,{id:'extra',bookId:id,questionId:`draft-${draft.id}`,selected:0}).correct).toBe(true)
+  const target=open();target.restore(s.backup());const restored=practiceState(target,id)
+  expect(restored.questions).toHaveLength(216);expect(restored.answers).toHaveLength(2)
+ })
  it('checks question citations against indexed pages and distinguishes unavailable sources',()=>{
   const s=open(),id='d'.repeat(64);s.createBook(id,'Book',id);s.updateBook(id,{status:'ready',pages:2})
   const question={id:'q',chapter:1,chapterTitle:'Chapter',topic:'Topic',prompt:'Question?',options:[{text:'A',explanation:'yes'},{text:'B',explanation:'no'},{text:'C',explanation:'no'},{text:'D',explanation:'no'}],correct:0,source:{page:0,quote:'Text from source'}}
