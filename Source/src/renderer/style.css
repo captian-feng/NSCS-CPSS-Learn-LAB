@@ -49,6 +49,7 @@
 .resize-handle.left{left:0;right:auto}.resize-handle:hover,.resize-handle:focus-visible{background:var(--green);opacity:.55}
 .reading-view .topbar{height:36px;padding:0 10px}.reading-view .topbar strong{font-size:12px}.reading-view .nav-toggle{font-size:11px;padding:3px 7px}.reading-view .avatar{display:none}.reading-view .top-actions button{font-size:11px;padding:3px 6px}
 .report-issues{display:flex;flex-direction:column;gap:8px;max-height:45vh;overflow:auto}.report-issues button{text-align:left;line-height:1.5}
+.search-book-scope{display:flex;flex-wrap:wrap;gap:8px 16px;margin:12px 0;padding:12px;border:1px solid var(--border)}.search-book-scope label{display:flex;align-items:center;gap:5px}
 .reader-toolbar.compact-tools{min-height:36px;height:auto;padding:3px 8px;gap:5px;flex-wrap:wrap;background:var(--bg)}
 .tool-group{display:flex;align-items:center;gap:4px;min-width:0;flex-wrap:wrap}.compact-tools button{font-size:11px;padding:3px 6px;min-height:25px;white-space:nowrap}.compact-tools label{font-size:11px;color:var(--muted);white-space:nowrap}.compact-tools input{width:52px;padding:2px 3px;font-size:11px;text-align:center}
 .compact-tools button[aria-pressed=true]{background:var(--green-light)}.zoom-value{min-width:44px}.reading-footer{height:25px;padding:0 10px;font-size:9px}.pdf-page{margin-top:10px}.app.immersive .topbar{height:32px}

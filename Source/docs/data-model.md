@@ -22,7 +22,7 @@ HTML anchors include start/end block, UTF-16 offsets, exact selected text, surro
 
 Current extraction preserves source strings and joins line/paragraph boundaries without aggressive dehyphenation. It does not yet provide a general original-to-normalized character mapping. Search returns original block identities, so indexed source text maps directly back to displayed blocks.
 
-Backups use `format=cpss-lab`, `schemaVersion=1`, book identities, records, positions, progress and settings. Full input validation precedes a transaction. Same-ID identical records are skipped; differing records cause a full rollback instead of silent overwrite. Missing books are preserved as pending PDF association. UUID records survive re-import of the same source hash. Markdown includes notes, citations, tasks, completion status, target dates, reading position and chapter status.
+Backups use `format=cpss-lab` and `schemaVersion=6`, including book identities and metadata, records, positions, progress, settings, practice answers, custom banks, manual chapters and question drafts. Restore also accepts versions 1–5. New answers include an immutable question snapshot and its SHA-256 content identifier; case snapshots also preserve their scenario and table. Older answers may lack snapshots or case context. Version 2 requires its custom-bank and manual-chapter fields, and versions 3–6 also require the draft field. Version 6 requires book metadata and rejects conflicting metadata when merging. Full input validation precedes a transaction. Same-ID identical records are skipped; differing records cause a full rollback instead of silent overwrite. Missing books are preserved as pending PDF association. UUID records survive re-import of the same source hash. Markdown includes notes, citations, tasks, completion status, target dates, reading position and chapter status.
 
 Filesystem:
 
@@ -33,3 +33,5 @@ userData/
 ```
 
 PDF crops are rendered on demand and not persisted as redundant screenshots. Back up study JSON regularly; for a whole-library copy, fully close the app first. Uninstall is configured to retain userData; actual Windows uninstall behavior remains part of the Windows verification checklist.
+
+The settings panel can also export a full-library folder using an online SQLite snapshot and SHA-256-verified copies of each managed PDF. The folder contains `library.sqlite`, `books/`, and `manifest.json`. Missing textbooks or active imports prevent this export. A restore validates the manifest, database integrity and textbook hashes before creating a separate library folder. Users can select a validated library in settings, then restart the app to use it. The selected path is stored in `active-library.json` in the starting profile. If it is unavailable on startup, the app opens the starting profile with a visible warning. Packaged-app restart and cross-machine recovery remain to be validated.

@@ -2,8 +2,8 @@ import {afterEach,describe,expect,it} from 'vitest'
 import {mkdtempSync,rmSync} from 'node:fs'
 import {join} from 'node:path'
 import {tmpdir} from 'node:os'
-import {LabStore} from '../src/storage/store'
-import {importCustomBank,practiceState,submitAnswer} from '../src/practice/engine'
+import {LabStore,newRecord} from '../src/storage/store'
+import {importCustomBank,practiceState,snapshotRevision,submitAnswer,verifyQuestionSource,verifyBankSources} from '../src/practice/engine'
 import bank from '../src/practice/bank.json'
 import blueprint from '../src/practice/blueprint.json'
 import legacy from './fixtures/legacy-practice-0.4.json'
@@ -11,6 +11,19 @@ const roots:string[]=[],stores:LabStore[]=[]
 function open(root=mkdtempSync(join(tmpdir(),'cpss-practice-'))){if(!roots.includes(root))roots.push(root);const store=new LabStore(root);stores.push(store);return store}
 afterEach(()=>{for(const s of stores.splice(0))try{s.close()}catch{};for(const r of roots.splice(0))rmSync(r,{recursive:true,force:true})})
 describe('chapter practice and learning data',()=>{
+ it('checks question citations against indexed pages and distinguishes unavailable sources',()=>{
+  const s=open(),id='d'.repeat(64);s.createBook(id,'Book',id);s.updateBook(id,{status:'ready',pages:2})
+  const question={id:'q',chapter:1,chapterTitle:'Chapter',topic:'Topic',prompt:'Question?',options:[{text:'A',explanation:'yes'},{text:'B',explanation:'no'},{text:'C',explanation:'no'},{text:'D',explanation:'no'}],correct:0,source:{page:0,quote:'Text from source'}}
+  importCustomBank(s,id,{format:'cpss-lab-question-bank',schemaVersion:1,sourceHash:id,title:'Bank',version:'1',questions:[question]})
+  expect(verifyQuestionSource(s,{bookId:id,questionId:'q'}).status).toBe('unavailable')
+  s.putPage(id,{page:0,width:600,height:800,label:'1',status:'text',issues:[],regions:[],blocks:[{id:'b',bookId:id,page:0,order:0,kind:'paragraph',text:'Text from source and more',runs:[{text:'Text from source and more'}],rect:[0,0,100,20],level:0}]})
+  expect(verifyQuestionSource(s,{bookId:id,questionId:'q'}).status).toBe('matched')
+  expect(verifyBankSources(s,id)).toMatchObject([{questionId:'q',status:'matched',page:0}])
+  s.putPage(id,{page:0,width:600,height:800,label:'1',status:'text',issues:[],regions:[],blocks:[{id:'b',bookId:id,page:0,order:0,kind:'paragraph',text:'Different text',runs:[{text:'Different text'}],rect:[0,0,100,20],level:0}]})
+  expect(verifyQuestionSource(s,{bookId:id,questionId:'q'}).status).toBe('not-found')
+  expect(verifyBankSources(s,id)[0].status).toBe('not-found')
+  expect(()=>verifyQuestionSource(s,{bookId:id,questionId:'missing'})).toThrow('不属于')
+ })
  it('imports a textbook-specific bank, preserves attempts and restores it with backups',()=>{
   const s=open(),id='e'.repeat(64),other='f'.repeat(64)
   s.createBook(id,'New book',id);s.updateBook(id,{status:'ready',pages:2});s.createBook(other,'Other book',other);s.updateBook(other,{status:'ready',pages:2})
@@ -25,6 +38,22 @@ describe('chapter practice and learning data',()=>{
   expect(practiceState(target,id).questions[0].id).toBe('q1')
   expect(practiceState(target,id).answers[0].correct).toBe(true)
   expect(practiceState(target,other).available).toBe(false)
+ })
+ it('merges added questions in backups and rolls back conflicting question edits',()=>{
+  const source=open(),id='a'.repeat(64);source.createBook(id,'Book',id);source.updateBook(id,{status:'ready',pages:2})
+  const first={id:'q1',chapter:1,chapterTitle:'First',topic:'Force',prompt:'Question?',options:[{text:'A',explanation:'yes'},{text:'B',explanation:'no'},{text:'C',explanation:'no'},{text:'D',explanation:'no'}],correct:0,source:{page:0,quote:'Source text'}}
+  const bank={format:'cpss-lab-question-bank',schemaVersion:1,sourceHash:id,title:'Bank',version:'1',questions:[first]}
+  importCustomBank(source,id,bank)
+  submitAnswer(source,{id:'answer',bookId:id,questionId:'q1',selected:0})
+  const original=source.backup(),target=open();target.restore(original)
+  const newer={...original,customBanks:[{bookId:id,bank:{...original.customBanks[0].bank,questions:[first,{...first,id:'q2',prompt:'Second?'}]}}]}
+  target.restore(newer);expect(practiceState(target,id).questions.map(q=>q.id)).toEqual(['q1','q2'])
+  target.restore(original);expect(practiceState(target,id).questions).toHaveLength(2)
+  expect(practiceState(target,id).answers[0].correct).toBe(true)
+  const note=newRecord(id,0,'note',null,'Must roll back')
+  const conflicting={...newer,records:[note],customBanks:[{bookId:id,bank:{...newer.customBanks[0].bank,questions:[{...first,correct:1}]}}]}
+  expect(()=>target.restore(conflicting)).toThrow('题目与当前资料冲突')
+  expect(target.records(id)).toHaveLength(0);expect(practiceState(target,id).questions).toHaveLength(2)
  })
  it('covers 31 chapters, all 2026 tasks and nine original case groups, unique choices and source references',()=>{
   expect(bank.questions).toHaveLength(215)
@@ -72,9 +101,34 @@ describe('chapter practice and learning data',()=>{
   submitAnswer(s,{id:'a1',bookId:id,questionId:bank.questions[0].id,selected:0})
   const backup=s.backup(),target=open();expect(target.restore(backup)).toEqual({inserted:1,skipped:0})
   expect(target.restore(backup)).toEqual({inserted:0,skipped:1});expect(practiceState(target,id).answers).toEqual(practiceState(s,id).answers)
-  const conflict={...backup,practiceAnswers:[{...backup.practiceAnswers[0],id:'new'},{...backup.practiceAnswers[0],selected:1}]}
+  const conflict={...backup,practiceAnswers:[{...backup.practiceAnswers[0],id:'new'},{...backup.practiceAnswers[0],selected:1,correct:backup.practiceAnswers[0].questionSnapshot?.correct===1}]}
   expect(()=>target.restore(conflict)).toThrow('冲突');expect(practiceState(target,id).answers).toHaveLength(1)
   const {practiceAnswers:_,...legacy}=backup;expect(open().restore(legacy)).toEqual({inserted:0,skipped:0})
   const other='f'.repeat(64);target.createBook(other,'Other edition',other);expect(practiceState(target,other).available).toBe(false)
+ })
+ it('preserves question snapshots and enriches identical legacy answers',()=>{
+  const source=open(),id=bank.sourceHash;source.createBook(id,'Book',id)
+  const answer=submitAnswer(source,{id:'saved',bookId:id,questionId:bank.questions[0].id,selected:0})
+  expect(answer.questionSnapshot?.prompt).toBe(bank.questions[0].prompt)
+  expect(answer.revisionId).toMatch(/^[a-f0-9]{64}$/)
+  const backup=source.backup(),{questionSnapshot:_,revisionId:__,...legacy}=backup.practiceAnswers[0]
+  const target=open();target.restore({...backup,schemaVersion:3,practiceAnswers:[legacy]})
+  expect(practiceState(target,id).answers[0].questionSnapshot).toBeUndefined()
+  target.restore(backup)
+  expect(practiceState(target,id).answers[0].questionSnapshot).toEqual(answer.questionSnapshot)
+  const changed={...backup.practiceAnswers[0],revisionId:'0'.repeat(64)}
+  expect(()=>target.restore({...backup,practiceAnswers:[changed]})).toThrow('快照')
+ })
+ it('keeps case study background and tables in the answer snapshot',()=>{
+  const s=open(),id=bank.sourceHash;s.createBook(id,'Book',id)
+  const question=bank.questions.find(q=>'caseStudy' in q)
+  if(!question||!('caseStudy' in question))throw new Error('Missing case fixture')
+  const answer=submitAnswer(s,{id:'case-answer',bookId:id,questionId:question.id,selected:0})
+  expect(answer.questionSnapshot?.caseStudy).toEqual(question.caseStudy)
+  const target=open();target.restore(s.backup())
+  expect(practiceState(target,id).answers[0].questionSnapshot?.caseStudy).toEqual(question.caseStudy)
+  const {caseStudy:_,...legacySnapshot}=answer.questionSnapshot!
+  const older=open();older.restore({...s.backup(),schemaVersion:4,practiceAnswers:[{...answer,questionSnapshot:legacySnapshot,revisionId:snapshotRevision(legacySnapshot)}]})
+  expect(practiceState(older,id).answers[0].questionSnapshot?.caseStudy).toBeUndefined()
  })
 })

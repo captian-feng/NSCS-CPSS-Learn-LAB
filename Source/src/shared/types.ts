@@ -1,5 +1,5 @@
 export type Rect = [number, number, number, number]
-export type Book = { id: string; title: string; hash: string; pages: number; language: string; status: string; processed: number; error: string | null }
+export type Book = { id: string; title: string; hash: string; pages: number; language: string; author:string; category:string; status: string; processed: number; error: string | null }
 export type TocNode = { id: string; bookId: string; parentId: string | null; title: string; page: number; level: number; source: string }
 export type TextRun = { text: string; bold?: boolean; italic?: boolean }
 export type Block = { id: string; bookId: string; page: number; order: number; kind: string; text: string; runs: TextRun[]; rect: Rect; level: number }
@@ -13,6 +13,7 @@ export type RecordKind = 'highlight' | 'underline' | 'note' | 'bookmark' | 'card
 export type StudyRecord = { id: string; bookId: string; kind: RecordKind; page: number; anchor: Anchor | null; text: string; color: string; important: boolean; due: string; done: boolean; updated: string }
 export type Progress = { nodeId: string; status: '未开始' | '学习中' | '已完成' | '需要复习' }
 export type SearchHit = { id: string; page: number; text: string; type: 'text' | 'note' }
+export type LibrarySearchHit = SearchHit & {bookId:string;bookTitle:string}
 export type Snapshot = { books: Book[]; settings: Record<string, unknown>; bootstrapError?:string }
 export type BookDetail = { book: Book; toc: TocNode[]; records: StudyRecord[]; progress: Progress[]; position: { page: number; blockId?: string } | null }
 export type ImportEvent = { bookId: string; processed: number; total: number; status: string; error?: string }
@@ -22,12 +23,16 @@ export interface DesktopAPI {
   importQuestionBank(bookId:string):Promise<PracticeState | null>;
   exportData(format: 'json' | 'markdown'): Promise<string | null>;
   restoreData(): Promise<{ inserted: number; skipped: number } | null>;
+  exportFullBackup(): Promise<string | null>;
+  restoreFullBackup(): Promise<string | null>;
+  switchLibrary(): Promise<boolean>;
   openDataFolder(): Promise<void>;
   dataLocation(): Promise<{path:string;kind:'custom'|'default'}>;
+  checkLocalModels(): Promise<{available:boolean;models:string[];error?:string}>;
   openReference(url:string):Promise<void>;
   onProgress(listener: (event: ImportEvent) => void): () => void;
 }
 declare global { interface Window { desktop: DesktopAPI } }
 export type PracticeQuestion = {caseStudy?:{id:string;title:string;scenario:string;columns:string[];rows:string[][]};task:string;questionType:string;id:string;chapter:number;chapterTitle:string;priority:number;topic:string;prompt:string;options:{text:string;explanation:string}[];correct:number;source:{page:number;blockId:string;quote:string};provenance:string}
-export type PracticeAnswer = {id:string;bookId:string;questionId:string;selected:number;correct:boolean;created:string}
+export type PracticeAnswer = {id:string;bookId:string;questionId:string;selected:number;correct:boolean;created:string;revisionId?:string;questionSnapshot?:{prompt:string;options:{text:string;explanation:string}[];correct:number;source:{page:number;quote:string};caseStudy?:PracticeQuestion['caseStudy']}}
 export type PracticeState = {questions:PracticeQuestion[];answers:PracticeAnswer[];version:string;available:boolean;builtin:boolean}
